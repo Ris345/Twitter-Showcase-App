@@ -2,10 +2,14 @@ import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import {
+ BrowserRouter as Router, Routes ,Route
+} from "react-router-dom";
+
 
 function Navmenu() {
   return (
-    <div>
+        <div>
       <Navbar bg="light" expand="lg">
     <Container>
       <Navbar.Brand href="#home">Twitter Showcase</Navbar.Brand>
@@ -19,7 +23,9 @@ function Navmenu() {
       </Navbar.Collapse>
     </Container>
   </Navbar>
-    </div>
+      </div>
+     
+
   )
 }
 
