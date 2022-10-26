@@ -3,7 +3,7 @@ import React from "react";
 function SearchPage() {
   return (
     <div>
-      <label>Search for Twitter users</label>
+      <label>Search</label>
       <input></input>
     </div>
   );
