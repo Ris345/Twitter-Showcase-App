@@ -16,27 +16,13 @@ app.get("/api/tweets", (req, res) => {
       },
     })
     .then(function (response) {
-      console.log(response);
+      res.send(response.data);
     })
     .catch(function (error) {
       console.log(error);
     });
-  res.send(response);
 });
 
 app.listen(3001, () => {
   console.log(`Example pp listening on port 3001`);
 });
-
-// axios
-//   .get(
-//     "https://api.twitter.com/1.1/search/tweets.json?q=nasa&result_type=popular"
-//   )
-//   .then(function (response) {
-//     // handle success
-//     console.log(response);
-//   })
-//   .catch(function (error) {
-//     // handle error
-//     console.log(error);
-//   });

@@ -8,7 +8,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   useEffect(() => {
-    axios.get("/api/tweets").then((response) => console.log(response.data));
+    axios.get("/api/tweets").then((response) => console.log(response));
   }, []);
   
   return (
