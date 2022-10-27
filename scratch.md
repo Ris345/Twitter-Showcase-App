@@ -22,4 +22,24 @@ step 2
   
   
 
+
+SEARCH TWEETS 
+
+step 1 user types 
+step2 tweet appears 
+
+
+
+step 1 declare state in Home.js in the front-end
+step 2 pass the state through the nav component
+step 3 pass the state in the search component
+
+
+
+
+
+
+
+
+
  

@@ -5,12 +5,11 @@ import Navbar from 'react-bootstrap/Navbar';
 
 
 function Navmenu() {
-  
   return (
         <div>
       <Navbar bg="light" expand="lg">
     <Container>
-      <Navbar.Brand href="#home">Twitter Showcase</Navbar.Brand>
+      <Navbar.Brand href="/Home">Twitter Showcase</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
@@ -20,12 +19,11 @@ function Navmenu() {
          </Nav>
       </Navbar.Collapse>
     </Container>
-  </Navbar>
+      </Navbar>
       </div>
-     
-
   )
 }
+
 
 export default Navmenu
 

@@ -2,14 +2,18 @@ import "./App.css";
 import Home from "./components/Home";
 import Search from "./components/Search";
 import Random from "./components/Random";
-import { useEffect } from "react";
-import axios from "axios";
 import { Routes, Route } from "react-router-dom";
 
+
+
 function App() {
-  useEffect(() => {
-    axios.get("/api/tweets").then((response) => console.log(response));
-  }, []);
+  // const [tweets, setTweets] = useState([])
+
+  // useEffect(() => {
+  //   axios.get("/api/tweets").then((response) => setTweets(response));
+  // }, []);
+
+  // console.log(tweets)
   
   return (
     <Routes>
