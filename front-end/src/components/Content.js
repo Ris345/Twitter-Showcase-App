@@ -7,14 +7,16 @@ function Content() {
       <Card.Body>
         <Card.Title>Twitter Showcase App</Card.Title>
         <Card.Text>
-          Welcome to my Twitter Showcase App.
-          You can spy on other Twitter users
-          from here. 
+          Welcome to my Twitter Showcase App
+          
         </Card.Text>
-        <Card.Link>Tweet Tweet</Card.Link>
+        <Card.Link> Tweet </Card.Link>
       </Card.Body>
     </Card>
   );
 }
 
 export default Content;
+
+
+

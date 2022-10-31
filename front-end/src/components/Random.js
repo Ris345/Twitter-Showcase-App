@@ -1,19 +1,19 @@
-import React from 'react'
-import Navmenu  from './Navmenu'
-import Footer from './Footer'
+import React, { useContext } from "react";
+import Navmenu from "./Navmenu";
+import Footer from "./Footer";
+import { UserContext } from "../userContext";
 
-function RandomTweet(props) {
-  console.log(props.tweets)
+function RandomTweet() {
+  const msg = useContext(UserContext);
+
+  console.log("From Random:", msg);
   return (
     <div>
-      <Navmenu/>
+      <Navmenu />
       <h1>This is random tweet page.</h1>
-      <Footer/>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default RandomTweet
-
-
-
+export default RandomTweet;

@@ -7,11 +7,9 @@ step 6 random page appears
 
 // going to work through making http requests from the back end.
 
-
 step 1 make a axios.get  call from the backend to twitter 
 step 2 then make fetch all from the front-end to the back-end 
 step 3 console.log(data)
-
 
 step 1 
  get data from twitter using axios 
@@ -21,18 +19,42 @@ step 1
 step 2 
   
   
-
-
 SEARCH TWEETS 
-
 step 1 user types 
 step2 tweet appears 
-
-
 
 step 1 declare state in Home.js in the front-end
 step 2 pass the state through the nav component
 step 3 pass the state in the search component
+
+
+DICONSTRUCT TWITTER DATA 
+step 1 - study the way data is organized in the console. 
+
+
+
+SEARCH FOR THE TWITTER USER 
+step 1 user types somehthing in the input thing 
+step 2 that data is passed to the back-end 
+step 3 the API makes a request from the backend to the twitter server 
+step 4 returns the relvant tweets 
+step 5 that tweet is displayed in the front-end 
+ 
+
+ 
+SEARCH FOR THE TWITTER USER 
+step 1 get data from serachParams to app.js 
+step 2 send the data from app.js as a get request to the back-end 
+step 3 use that data in the back-end to set a get request to the twitter API 
+step 4 display that data to SEARCH PAGE 
+
+
+
+
+
+
+
+
 
 
 
