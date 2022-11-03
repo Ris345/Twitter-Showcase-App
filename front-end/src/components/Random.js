@@ -1,16 +1,25 @@
-import React, { useContext } from "react";
+
 import Navmenu from "./Navmenu";
 import Footer from "./Footer";
-import  UserContext  from "../userContext";
+
 
 function RandomTweet() {
-  const msg = useContext(UserContext);
+    
 
-  console.log("From Random:", msg);
+
+
+
+
   return (
     <div>
       <Navmenu />
-      <h1>This is random tweet page.</h1>
+      <h1>Random Tweets</h1>
+      <button><h1>Tweet1</h1></button>
+      <button> <h1>Tweet2</h1></button>
+      <button> <h1>Tweet3</h1></button>
+      <button> <h1>Tweet4</h1></button>
+      <button> <h1>Tweet5</h1></button>
+    
       <Footer />
     </div>
   );

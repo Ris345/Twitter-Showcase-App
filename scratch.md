@@ -49,7 +49,10 @@ step 3 use that data in the back-end to set a get request to the twitter API
 step 4 display that data to SEARCH PAGE 
 
 
-
+GET RANDOM TWEETS FROM % TWITTER USER 
+step 1 user clicks thr tweet 1 button 
+step 2 user gets a random tweet displayed on the front-end 
+step 3 
 
 
 

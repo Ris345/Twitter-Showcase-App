@@ -4,8 +4,6 @@ const app = express();
 const axios = require("axios");
 require("dotenv").config();
 
-
-
 app.get("/api/tweets", (req, res) => {
   const user = req.query.query;
   console.log(user);
@@ -24,12 +22,13 @@ app.get("/api/tweets", (req, res) => {
       res.send(response.data);
     })
     .catch(function (error) {
-      console.log(error)
+      console.log(error);
     });
 });
 
-
-
+app.get("api/tweets/random", (req, res) => {
+  
+});
 
 app.listen(3001, () => {
   console.log(`Example pp listening on port 3001`);
