@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Navmenu from "./Navmenu";
 import Footer from "./Footer";
-import { UserContext } from "../userContext";
+import  UserContext  from "../userContext";
 
 function RandomTweet() {
   const msg = useContext(UserContext);

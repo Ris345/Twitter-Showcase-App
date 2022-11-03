@@ -1,54 +1,44 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Navmenu from "./Navmenu";
 import Footer from "./Footer";
-import { UserContext } from "../userContext";
-import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 function SearchPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [userInput, setuserInput] = useState()
-  
+  const [userInput, setuserInput] = useState();
+  const [tweets, setTweets] = useState([]);
+
   const updateForm = (e) => {
     e.preventDefault();
-    setuserInput(e.target.value)
-    setSearchParams(userInput)
-    const q = searchParams.get('q')
-    console.log(q)
+    setuserInput(e.target.value);
+  };
 
-}
-  
-  
+  const handleSubmit = () => {
+    axios
+      .get("api/tweets", {
+        params: {
+          query: userInput,
+        },
+      })
+      .then((response) => setTweets(response.data.statuses));
+  };
 
-  const tweets = useContext(UserContext);
   console.log("From Search:", tweets);
 
   return (
     <div>
       <Navmenu />
-      <Form>
+      <Form onSubmit={updateForm}>
         <Form.Group className="mb-3">
           <Form.Label>Search Tweets</Form.Label>
           <Form.Control placeholder="Enter" onChange={updateForm} />
         </Form.Group>
       </Form>
-      <div>
-        <p></p>
-      </div>
+      <button onClick={handleSubmit}>Search</button>
+      <div></div>
       <Footer />
     </div>
   );
 }
 
 export default SearchPage;
-
-
-
-
-// const updateForm = (e) => {
-//   e.preventDefault();
-//   const input = searchParams.get("q")
-//   console.log(input)
-//   setuserInput(e.target.value)
- 
-// }
