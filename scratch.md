@@ -55,6 +55,23 @@ step 2 user gets a random tweet displayed on the front-end
 step 3 
 
 
+Get the random tweets to make reuest to the back-end 
+
+step 1 user clicks one of the twitter users 
+step 2 the button fires the handleSubmit and changes the state 
+step 3 the handlesubmit also fires the axios request and sends it to the back-end 
+step 4 the back-end calls the twitter api server and retrives the data 
+step 5 selected data is displayed in the front-end 
+
+
+Get random tweets 
+step 1 from the array of random tweets ramdomize the tweets
+
+
+
+
+
+
 
 
 

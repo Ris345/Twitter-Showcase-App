@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 function Navmenu() {
   return (
     <div>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="info" expand="lg" variant="dark">
         <Container>
           <Navbar.Brand href="/">Twitter Showcase</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
