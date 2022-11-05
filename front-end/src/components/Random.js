@@ -4,75 +4,88 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function RandomTweet() {
-  const [randomTweet, setrandomTweet] = useState();
+  const [randomTweet, setrandomTweet] = useState("");
   const [incoming, setIncoming] = useState();
+  const [displaytweets, setdisplayTweets] = useState();
 
-  const handleSubmit = () => {
+  function randomTweets(tweets) {
+    const results = Math.floor(Math.random() * tweets.length);
+    setdisplayTweets(tweets[results]);
+
+  }
+
+console.log()
+
+  const handleSubmit = (twitterHandle) => {
+  
     axios
       .get("api/tweets/random", {
         params: {
-          query: randomTweet,
+          query: twitterHandle,
         },
       })
-      .then((response) => setIncoming(response.data.statuses));
+      .then((response) => {
+        const tweets = response.data.statuses;
+        const random = randomTweets(tweets);
+        setIncoming(response.data.statuses);
+      });
   };
 
-  console.log(incoming);
 
 
   const newYorkTimes = () => {
     setrandomTweet("@nytimes");
-    handleSubmit();
+    handleSubmit("@nytimes");
   };
 
   const villageVanguard = () => {
     setrandomTweet("@vanguardjazz");
-    handleSubmit();
+    handleSubmit("@vanguardjazz");
   };
 
   const sunHouse = () => {
     setrandomTweet("@SunhouseInc");
-    handleSubmit();
+    handleSubmit("@SunhouseInc");
   };
 
   const jazzGallery = () => {
     setrandomTweet("@TheJazzGallery");
-    handleSubmit();
+    handleSubmit("@TheJazzGallery");
   };
 
   const Nasa = () => {
     setrandomTweet("@nasa");
-    handleSubmit();
+    handleSubmit("@nasa");
   };
 
-  console.log(" randomTweet: ", randomTweet);
+  //console.log(" randomTweet: ", randomTweet);
 
   return (
     <div>
       <Navmenu />
       <div className="tweet-box">
-      <h1>Random Tweets</h1>
-      <button onClick={newYorkTimes}>
-        <h1>The New York Times</h1>
-      </button>
-      <button onClick={villageVanguard}>
-        {" "}
-        <h1>The Village Vanguard</h1>
-      </button>
-      <button onClick={sunHouse}>
-        {" "}
-        <h1>Sunhouse</h1>
-      </button>
-      <button onClick={jazzGallery}>
-        {" "}
-        <h1>The Jazz Gallery</h1>
-      </button>
-      <button onClick={Nasa}>
-        {" "}
-        <h1>NASA</h1>
-      </button>
+        <h1>...</h1>
+        <button onClick={newYorkTimes}>
+          <h1>The New York Times</h1>
+        </button>
+        <button onClick={villageVanguard}>
+          {" "}
+          <h1>The Village Vanguard</h1>
+        </button>
+        <button onClick={sunHouse}>
+          {" "}
+          <h1>Sunhouse</h1>
+        </button>
+        <button onClick={jazzGallery}>
+          {" "}
+          <h1>The Jazz Gallery</h1>
+        </button>
+        <button onClick={Nasa}>
+          {" "}
+          <h1>NASA</h1>
+        </button>
       </div>
-      <div className="display-area"> Tweet Display Area</div>
+      <div className="display-area"> ..</div>
       <Footer />
     </div>
   );

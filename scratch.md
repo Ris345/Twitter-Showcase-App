@@ -68,6 +68,11 @@ Get random tweets
 step 1 from the array of random tweets ramdomize the tweets
 
 
+Problem 
+step 1 clear the previous state before updating the new state 
+
+
+
 
 
 
