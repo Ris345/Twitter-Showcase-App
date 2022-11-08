@@ -4,20 +4,21 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function RandomTweet() {
-  const [randomTweet, setrandomTweet] = useState("");
-  const [incoming, setIncoming] = useState();
-  const [displaytweets, setdisplayTweets] = useState();
+  const [randomTweet, setrandomTweet] = useState({});
+  const [incoming, setIncoming] = useState([]);
+  const [displaytweets, setdisplayTweets] = useState([[]]);
 
   function randomTweets(tweets) {
     const results = Math.floor(Math.random() * tweets.length);
-    setdisplayTweets(tweets[results]);
-
+    setdisplayTweets(tweets[results].text);
+    return tweets[results];
   }
 
-console.log()
+
+console.log(displaytweets); 
+
 
   const handleSubmit = (twitterHandle) => {
-  
     axios
       .get("api/tweets/random", {
         params: {
@@ -27,11 +28,9 @@ console.log()
       .then((response) => {
         const tweets = response.data.statuses;
         const random = randomTweets(tweets);
-        setIncoming(response.data.statuses);
+        setIncoming(tweets);
       });
   };
-
-
 
   const newYorkTimes = () => {
     setrandomTweet("@nytimes");
@@ -58,8 +57,6 @@ console.log()
     handleSubmit("@nasa");
   };
 
-  //console.log(" randomTweet: ", randomTweet);
-
   return (
     <div>
       <Navmenu />
@@ -85,7 +82,7 @@ console.log()
           <h1>NASA</h1>
         </button>
       </div>
-      <div className="display-area"> ..</div>
+      <div className="display-area"></div>
       <Footer />
     </div>
   );

@@ -18,7 +18,6 @@ step 1
  is this get or a post request get
 step 2 
   
-  
 SEARCH TWEETS 
 step 1 user types 
 step2 tweet appears 
@@ -74,9 +73,22 @@ step 1 clear the previous state before updating the new state
 
 
 
+DISPLAY TWEETS ON RANDOM TWEETS PAGE 
+step 1 user clicks on the tweet 
+step 2 tweet displays on the front-end 
+
+
+DISPLAY TWEETS ON THE SEARCH PAGE 
+step 1 user searches tweet 
+step 2 user clicks on searchh button 
+step 3 tweet displays on the front-end 
 
 
 
+
+Display Tweets 
+step 1 destucture the incoming data from twitter 
+step 2 find what needs to be displayed 
 
 
 

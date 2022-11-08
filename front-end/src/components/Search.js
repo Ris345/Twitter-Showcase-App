@@ -21,7 +21,7 @@ function SearchPage() {
           query: userInput,
         },
       })
-      .then((response) => setTweets(response.data.statuses));
+      .then((response) => setTweets(response.data));
   };
 
   console.log("From Search:", tweets);
