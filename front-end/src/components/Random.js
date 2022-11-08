@@ -82,7 +82,7 @@ console.log(displaytweets);
           <h1>NASA</h1>
         </button>
       </div>
-      <div className="display-area"></div>
+      <div className="display-area">{displaytweets}</div>
       <Footer />
     </div>
   );
