@@ -18,7 +18,7 @@ function RandomTweet() {
     const results = Math.floor(Math.random() * tweets.length);
     setText(tweets[results].text);
     setUser(tweets[results].user.name); 
-    setFavorite(tweets[results].favorite_count);
+    setFavorite(tweets[results].retweeted_status.favorite_count);
     setRetweet(tweets[results].retweet_count); 
     return tweets[results];
   }
@@ -93,7 +93,9 @@ function RandomTweet() {
           <h1>NASA</h1>
         </button>
       </div>
+      <div>{user}</div>
       <div className="display-area">{text}</div>
+      <div>{retweet}</div><div>{favorite}</div>
       <Footer />
     </div>
   );
