@@ -7,15 +7,26 @@ function RandomTweet() {
   const [randomTweet, setrandomTweet] = useState({});
   const [incoming, setIncoming] = useState([]);
   const [displaytweets, setdisplayTweets] = useState([[]]);
+  const [user, setUser] = useState([]); 
+  const [favorite, setFavorite] = useState([]); 
+  const [text, setText] = useState([]); 
+  const [retweet, setRetweet] = useState([]); 
 
+
+  
   function randomTweets(tweets) {
     const results = Math.floor(Math.random() * tweets.length);
-    setdisplayTweets(tweets[results].text);
+    setText(tweets[results].text);
+    setUser(tweets[results].user.name); 
+    setFavorite(tweets[results].favorite_count);
+    setRetweet(tweets[results].retweet_count); 
     return tweets[results];
   }
 
-
-console.log(displaytweets); 
+  console.log("retweets", retweet); 
+  console.log("users", user); 
+  console.log("favorites", favorite);
+  console.log("text", text); 
 
 
   const handleSubmit = (twitterHandle) => {
@@ -82,7 +93,7 @@ console.log(displaytweets);
           <h1>NASA</h1>
         </button>
       </div>
-      <div className="display-area">{displaytweets}</div>
+      <div className="display-area">{text}</div>
       <Footer />
     </div>
   );
