@@ -17,7 +17,6 @@ step 1
  twitter needs proper url 
  is this get or a post request get
 step 2 
-  
 SEARCH TWEETS 
 step 1 user types 
 step2 tweet appears 
@@ -84,18 +83,23 @@ step 2 user clicks on searchh button
 step 3 tweet displays on the front-end 
 
 
-
-
 Display Tweets 
 step 1 destucture the incoming data from twitter 
 step 2 find what needs to be displayed 
 
 
 
+Search Tweets 
+step 1 if user searches tweet with @ ---> make a id call to the the back-end 
+step 2 else ----> make a regular call 
 
 
-
-
+Random Tweets 
+ step 1 user clicks the random tweet and the back-end makes a call to the twitter api with the specified id ..
+ step 2 results are displayed in the front-end 
+ 
+ 
+ 
 
 
 

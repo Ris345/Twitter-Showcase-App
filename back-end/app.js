@@ -31,7 +31,6 @@ app.get("/api/tweets/random", (req, res) => {
     url: `https://api.twitter.com/1.1/search/tweets.json?q=${user}`,
     headers: {
       authorization: `Bearer ${process.env.TOKEN}`,
-      
     },
   };
 

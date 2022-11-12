@@ -2,32 +2,34 @@ import Navmenu from "./Navmenu";
 import Footer from "./Footer";
 import React, { useState } from "react";
 import axios from "axios";
+import Card from "react-bootstrap/Card";
 
 function RandomTweet() {
   const [randomTweet, setrandomTweet] = useState({});
   const [incoming, setIncoming] = useState([]);
-  const [displaytweets, setdisplayTweets] = useState([[]]);
-  const [user, setUser] = useState([]); 
-  const [favorite, setFavorite] = useState([]); 
-  const [text, setText] = useState([]); 
-  const [retweet, setRetweet] = useState([]); 
+  const [displaytweets, setdisplayTweets] = useState([]);
+  const [user, setUser] = useState([]);
+  const [twitterHandle, settwitterHandle] = useState([]);
+  const [favorite, setFavorite] = useState([]);
+  const [text, setText] = useState([]);
+  const [retweet, setRetweet] = useState([]);
+  const [img, setImg] = useState([]);
 
-
-  
   function randomTweets(tweets) {
+    console.log(tweets)
     const results = Math.floor(Math.random() * tweets.length);
     setText(tweets[results].text);
-    setUser(tweets[results].user.name); 
-    setFavorite(tweets[results].retweeted_status.favorite_count);
-    setRetweet(tweets[results].retweet_count); 
+    setUser(tweets[results].screen_name);
+    setFavorite(tweets[results].favorite_count);
+    setRetweet(tweets[results].retweet_count);
+    settwitterHandle(tweets[results].user.screen_name);
     return tweets[results];
   }
 
-  console.log("retweets", retweet); 
-  console.log("users", user); 
+  console.log("retweets", retweet);
+  console.log("users", user);
   console.log("favorites", favorite);
-  console.log("text", text); 
-
+  console.log("text", text);
 
   const handleSubmit = (twitterHandle) => {
     axios
@@ -93,9 +95,20 @@ function RandomTweet() {
           <h1>NASA</h1>
         </button>
       </div>
-      <div>{user}</div>
-      <div className="display-area">{text}</div>
-      <div>{retweet}</div><div>{favorite}</div>
+      <div>
+        <Card className="tweet-body">
+          <Card.Body>
+            <Card.Title>
+              {user} {twitterHandle}
+            </Card.Title>
+            <Card.Text>{text}</Card.Text>
+            <Card.Text>
+              {favorite} {retweet}
+            </Card.Text>
+            <Card.Link></Card.Link>
+          </Card.Body>
+        </Card>
+      </div>
       <Footer />
     </div>
   );
