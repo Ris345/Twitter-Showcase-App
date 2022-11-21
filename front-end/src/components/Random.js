@@ -9,27 +9,26 @@ function RandomTweet() {
   const [incoming, setIncoming] = useState([]);
   const [displaytweets, setdisplayTweets] = useState([]);
   const [user, setUser] = useState([]);
-  const [twitterHandle, settwitterHandle] = useState([]);
   const [favorite, setFavorite] = useState([]);
   const [text, setText] = useState([]);
   const [retweet, setRetweet] = useState([]);
-  const [img, setImg] = useState([]);
+  const [tweetData, settweetData] = useState([]);
 
   function randomTweets(tweets) {
-    console.log(tweets)
     const results = Math.floor(Math.random() * tweets.length);
     setText(tweets[results].text);
-    setUser(tweets[results].screen_name);
-    setFavorite(tweets[results].favorite_count);
-    setRetweet(tweets[results].retweet_count);
-    settwitterHandle(tweets[results].user.screen_name);
+    setFavorite(tweets[results].public_metrics.like_count);
+    setRetweet(tweets[results].public_metrics.retweet_count);
     return tweets[results];
   }
 
-  console.log("retweets", retweet);
-  console.log("users", user);
-  console.log("favorites", favorite);
-  console.log("text", text);
+  // console.log("retweets", retweet);
+  // console.log("users", user);
+  // console.log("favorites", favorite);
+  // console.log("text", text);
+
+
+  console.log("Random:", displaytweets);
 
   const handleSubmit = (twitterHandle) => {
     axios
@@ -39,35 +38,48 @@ function RandomTweet() {
         },
       })
       .then((response) => {
-        const tweets = response.data.statuses;
+        const tweets = response.data.data;
         const random = randomTweets(tweets);
         setIncoming(tweets);
+        settweetData(response.data);
+      });
+
+    axios
+      .get("api/tweets/randomid", {
+        params: {
+          query: twitterHandle,
+        },
+      })
+      .then((response) => {
+        setUser(response.data.data.name);
       });
   };
 
+  console.log(tweetData);
+
   const newYorkTimes = () => {
-    setrandomTweet("@nytimes");
-    handleSubmit("@nytimes");
+    setrandomTweet("807095");
+    handleSubmit("807095");
   };
 
   const villageVanguard = () => {
-    setrandomTweet("@vanguardjazz");
-    handleSubmit("@vanguardjazz");
+    setrandomTweet("3410978867");
+    handleSubmit("3410978867");
   };
 
-  const sunHouse = () => {
-    setrandomTweet("@SunhouseInc");
-    handleSubmit("@SunhouseInc");
+  const elonMusk = () => {
+    setrandomTweet("44196397");
+    handleSubmit("44196397");
   };
 
   const jazzGallery = () => {
-    setrandomTweet("@TheJazzGallery");
-    handleSubmit("@TheJazzGallery");
+    setrandomTweet("22140254");
+    handleSubmit("22140254");
   };
 
   const Nasa = () => {
-    setrandomTweet("@nasa");
-    handleSubmit("@nasa");
+    setrandomTweet("11348282");
+    handleSubmit("11348282");
   };
 
   return (
@@ -82,9 +94,9 @@ function RandomTweet() {
           {" "}
           <h1>The Village Vanguard</h1>
         </button>
-        <button onClick={sunHouse}>
+        <button onClick={elonMusk}>
           {" "}
-          <h1>Sunhouse</h1>
+          <h1>ElonMusk</h1>
         </button>
         <button onClick={jazzGallery}>
           {" "}
@@ -98,12 +110,10 @@ function RandomTweet() {
       <div>
         <Card className="tweet-body">
           <Card.Body>
-            <Card.Title>
-              {user} {twitterHandle}
-            </Card.Title>
+            <Card.Title>{user}</Card.Title>
             <Card.Text>{text}</Card.Text>
             <Card.Text>
-              {favorite} {retweet}
+              {favorite} {retweet}{" "}
             </Card.Text>
             <Card.Link></Card.Link>
           </Card.Body>
