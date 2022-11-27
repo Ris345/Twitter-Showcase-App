@@ -7,29 +7,43 @@ import Card from "react-bootstrap/Card";
 function RandomTweet() {
   const [randomTweet, setrandomTweet] = useState({});
   const [incoming, setIncoming] = useState([]);
-  const [displaytweets, setdisplayTweets] = useState([]);
+  const [displayTweets, setdisplayTweets] = useState([]);
   const [user, setUser] = useState([]);
   const [favorite, setFavorite] = useState([]);
   const [text, setText] = useState([]);
   const [retweet, setRetweet] = useState([]);
   const [tweetData, settweetData] = useState([]);
+  const [img, setImg] = useState([]);
+  const [mediaKey, setmediaKey] = useState([])
 
-  function randomTweets(tweets) {
+  function randomTweets(tweets, tweetImages) {
     const results = Math.floor(Math.random() * tweets.length);
+    const imagesResults = Math.floor(Math.random() * tweetImages.length);
     setText(tweets[results].text);
     setFavorite(tweets[results].public_metrics.like_count);
     setRetweet(tweets[results].public_metrics.retweet_count);
-    return tweets[results];
+    setmediaKey([tweets[results].attachments.media_keys])
+    setdisplayTweets([tweetImages[imagesResults].media_key])
+    if (mediaKey) {
+      if (mediaKey === displayTweets) {
+         console.log('testing 123')
+      } else {
+         console.log('media keys does not match')
+       }
+    }
+    
+    const array = Object.keys(tweetImages[imagesResults]);
+    return array.includes("url")
+      ? setImg(tweetImages[imagesResults].url)
+      : setImg(tweetImages[imagesResults].preview_url);
+   
   }
 
-  // console.log("retweets", retweet);
-  // console.log("users", user);
-  // console.log("favorites", favorite);
-  // console.log("text", text);
+  console.log("media_key from data:" , mediaKey)
+  console.log("media_key from images:", displayTweets)
 
 
-  console.log("Random:", displaytweets);
-
+  
   const handleSubmit = (twitterHandle) => {
     axios
       .get("api/tweets/random", {
@@ -39,9 +53,12 @@ function RandomTweet() {
       })
       .then((response) => {
         const tweets = response.data.data;
-        const random = randomTweets(tweets);
+        const tweetImages = response.data.includes.media
+          ? response.data.includes.media
+          : "";
+        const random = randomTweets(tweets, tweetImages);
         setIncoming(tweets);
-        settweetData(response.data);
+        settweetData(tweetImages);
       });
 
     axios
@@ -55,7 +72,7 @@ function RandomTweet() {
       });
   };
 
-  console.log(tweetData);
+  //console.log(tweetData);
 
   const newYorkTimes = () => {
     setrandomTweet("807095");
@@ -67,9 +84,9 @@ function RandomTweet() {
     handleSubmit("3410978867");
   };
 
-  const elonMusk = () => {
-    setrandomTweet("44196397");
-    handleSubmit("44196397");
+  const barackObama = () => {
+    setrandomTweet("813286");
+    handleSubmit("813286");
   };
 
   const jazzGallery = () => {
@@ -86,7 +103,7 @@ function RandomTweet() {
     <div>
       <Navmenu />
       <div className="tweet-box">
-        <h1>...</h1>
+        <h1></h1>
         <button onClick={newYorkTimes}>
           <h1>The New York Times</h1>
         </button>
@@ -94,9 +111,9 @@ function RandomTweet() {
           {" "}
           <h1>The Village Vanguard</h1>
         </button>
-        <button onClick={elonMusk}>
+        <button onClick={barackObama}>
           {" "}
-          <h1>ElonMusk</h1>
+          <h1>Barack Obama</h1>
         </button>
         <button onClick={jazzGallery}>
           {" "}
@@ -115,7 +132,10 @@ function RandomTweet() {
             <Card.Text>
               {favorite} {retweet}{" "}
             </Card.Text>
-            <Card.Link></Card.Link>
+            <img
+              className="tweet-image"
+              src={img ? img : null}
+            />
           </Card.Body>
         </Card>
       </div>

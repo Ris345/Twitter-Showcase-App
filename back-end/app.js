@@ -4,7 +4,7 @@ const app = express();
 const axios = require("axios");
 require("dotenv").config();
 
-//  gets tweets with regular search 
+//  gets tweets with regular search
 app.get("/api/tweets", (req, res) => {
   const user = req.query.query;
   const options = {
@@ -23,7 +23,6 @@ app.get("/api/tweets", (req, res) => {
     .catch(function (error) {
       console.log(error);
     });
-  
 });
 
 // gets random tweet from specified user
@@ -31,7 +30,7 @@ app.get("/api/tweets/random", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
-    url:`https://api.twitter.com/2/users/${user}/tweets?tweet.fields=public_metrics&expansions=attachments.media_keys&media.fields=duration_ms,height,media_key,preview_image_url,url`,
+    url: `https://api.twitter.com/2/users/${user}/tweets?tweet.fields=public_metrics&expansions=attachments.media_keys&media.fields=duration_ms,height,media_key,preview_image_url,url`,
     headers: {
       authorization: `Bearer ${process.env.TOKEN}`,
     },
@@ -47,14 +46,12 @@ app.get("/api/tweets/random", (req, res) => {
     });
 });
 
-
-
-// gets tweets based on the id of the user 
+// gets tweets based on the id of the user
 app.get("/api/tweets/idtweet", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
-    url:`https://api.twitter.com/2/users/${user}/tweets?tweet.fields=public_metrics&expansions=attachments.media_keys&media.fields=duration_ms,height,media_key,preview_image_url,url`,
+    url: `https://api.twitter.com/2/users/${user}/tweets?tweet.fields=public_metrics&expansions=attachments.media_keys&media.fields=duration_ms,height,media_key,preview_image_url,url`,
     headers: {
       authorization: `Bearer ${process.env.TOKEN}`,
     },
@@ -70,9 +67,7 @@ app.get("/api/tweets/idtweet", (req, res) => {
     });
 });
 
-
-
-// user name with random id 
+// user name with random id
 app.get("/api/tweets/randomid", (req, res) => {
   const user = req.query.query;
   const options = {
@@ -93,8 +88,7 @@ app.get("/api/tweets/randomid", (req, res) => {
     });
 });
 
-
-// get user to get the user id 
+// get user to get the user id
 app.get("/api/tweets/userid", (req, res) => {
   const user = req.query.query;
   const options = {
@@ -114,22 +108,6 @@ app.get("/api/tweets/userid", (req, res) => {
       console.log(error);
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.listen(3001, () => {
   console.log(`Example pp listening on port 3001`);

@@ -12,7 +12,8 @@ function SearchPage() {
   const [username, setuserName] = useState([]);
   const [userId, setuserId] = useState(null);
   const [tweetsId, setTweetsid] = useState();
-  const [tweetsContent, setTweetscontent] = useState();
+  const [tweetsContent, setTweetscontent] = useState([]);
+  const [img, setImg] = useState([])
 
   const updateForm = (e) => {
     e.preventDefault();
@@ -32,6 +33,7 @@ function SearchPage() {
       },
     });
     setTweets(responses.data);
+   
   };
 
   const regularTweets = () => {
@@ -41,7 +43,7 @@ function SearchPage() {
           query: userInput,
         },
       })
-      .then((response) => setTweets(response.data.statuses));
+      .then((response) => setTweetscontent(response.data.statuses));
   };
 
   const handleSubmit = () => {
@@ -56,10 +58,57 @@ function SearchPage() {
 
   console.log("From Search:", tweets);
 
+  console.log("From Search:" , tweetsContent)
+
   //console.log("From Search:", tweetsId);
 
-  const convertObject = [...Object.values(tweets)];
+  // const convertTweetObject = [...Object.values(tweets)];
 
+  // console.log(convertTweetObject)
+
+  // // function unPack() {
+  // //   setTweets((prevTweets) => {
+  // //     return {
+  // //       ...prevTweets,
+  // //       key: convertTweetObject,
+  // //     };
+  // //   });
+  // // }
+
+  // 
+
+  // function getMedia() {
+  //   for (let i = 0; i < tweets.includes.media.length; i++) {
+  //     if (tweets.includes.media[i].url) {
+  //       console.log(tweets.includes.media[i].url)
+  //     } else {
+  //       console.log(tweets.includes.media[i].preview_image_url)
+  //     }
+
+  //   }
+  // }
+
+  //console.log(tweets.includes.media[0].preview_image_url)
+
+  
+      const convertTweetObject = [...Object.values(tweets)];
+      const showuserTweets = convertTweetObject.map((tweet, index) => {
+          return (
+            <div key={index}>
+              <Card className="tweet-body">
+                <Card.Body>
+                  <Card.Title>{tweet.text}</Card.Title>
+                  <Card.Text>{tweet.like_count}</Card.Text>
+                  <Card.Text>{tweet.retweet_count}</Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+          );
+        });
+   
+
+
+  const convertObject = [...Object.values(tweetsContent)];
   const showTweets = convertObject.map((tweet, index) => {
     return (
       <div key={index}>
@@ -67,7 +116,7 @@ function SearchPage() {
           <Card.Body>
             <Card.Title>{tweet.user.name}</Card.Title>
             <Card.Text>{tweet.created_at.toLocaleString("en-US")}</Card.Text>
-            <Card.Text>{tweet.text}</Card.Text>
+            <Card.Text>{tweet.full_text}</Card.Text>
             <Card.Text>
               {tweet.favorite_count.toLocaleString("en-US")}
             </Card.Text>
@@ -77,6 +126,7 @@ function SearchPage() {
       </div>
     );
   });
+
 
   return (
     <div>
@@ -101,7 +151,7 @@ function SearchPage() {
       >
         Search
       </Button>
-      <div>{showTweets}</div>
+      <div>{showTweets ? showTweets : showuserTweets}</div>
       <Footer />
     </div>
   );
