@@ -14,36 +14,44 @@ function RandomTweet() {
   const [retweet, setRetweet] = useState([]);
   const [tweetData, settweetData] = useState([]);
   const [img, setImg] = useState([]);
-  const [mediaKey, setmediaKey] = useState([])
+  const [mediaKey, setmediaKey] = useState([]);
 
   function randomTweets(tweets, tweetImages) {
+    debugger;
     const results = Math.floor(Math.random() * tweets.length);
     const imagesResults = Math.floor(Math.random() * tweetImages.length);
     setText(tweets[results].text);
     setFavorite(tweets[results].public_metrics.like_count);
     setRetweet(tweets[results].public_metrics.retweet_count);
-    setmediaKey([tweets[results].attachments.media_keys])
-    setdisplayTweets([tweetImages[imagesResults].media_key])
-    if (mediaKey) {
-      if (mediaKey === displayTweets) {
-         console.log('testing 123')
+    // setmediaKey(tweets[results].attachments.media_keys);
+    // setdisplayTweets([tweetImages[imagesResults].media_key]);
+    if (tweets[results].attachments.media_keys) {
+      if (tweets[results].attachments.media_keys === tweetImages[imagesResults].media_key) {
+         console.log('check123')
+
+        // const array = Object.keys(tweetImages[imagesResults]);
+        // if (array.includes("url")) {
+        //   setImg(tweetImages[imagesResults].url);
+        // } else {
+        //   setImg(tweetImages[imagesResults].preview_url);
+        // }
       } else {
-         console.log('media keys does not match')
-       }
+        console.log("media keys does not match");
+      }
     }
-    
-    const array = Object.keys(tweetImages[imagesResults]);
-    return array.includes("url")
-      ? setImg(tweetImages[imagesResults].url)
-      : setImg(tweetImages[imagesResults].preview_url);
    
+    const array = Object.keys(tweetImages[imagesResults]);
+        if (array.includes("url")) {
+          setImg(tweetImages[imagesResults].url);
+        } else {
+          setImg(tweetImages[imagesResults].preview_image_url);
+        }
+
   }
 
-  console.log("media_key from data:" , mediaKey)
-  console.log("media_key from images:", displayTweets)
+  console.log("media_key from data:", mediaKey);
+  console.log("media_key from images:", displayTweets);
 
-
-  
   const handleSubmit = (twitterHandle) => {
     axios
       .get("api/tweets/random", {
@@ -73,10 +81,9 @@ function RandomTweet() {
   };
 
   //console.log(tweetData);
-
-  const newYorkTimes = () => {
-    setrandomTweet("807095");
-    handleSubmit("807095");
+  const Time = () => {
+    setrandomTweet("14293310");
+    handleSubmit("14293310");
   };
 
   const villageVanguard = () => {
@@ -104,8 +111,8 @@ function RandomTweet() {
       <Navmenu />
       <div className="tweet-box">
         <h1></h1>
-        <button onClick={newYorkTimes}>
-          <h1>The New York Times</h1>
+        <button onClick={Time}>
+          <h1>Time</h1>
         </button>
         <button onClick={villageVanguard}>
           {" "}
@@ -132,10 +139,7 @@ function RandomTweet() {
             <Card.Text>
               {favorite} {retweet}{" "}
             </Card.Text>
-            <img
-              className="tweet-image"
-              src={img ? img : null}
-            />
+            <img className="tweet-image" src={img ? img : null} />
           </Card.Body>
         </Card>
       </div>
