@@ -17,28 +17,12 @@ function RandomTweet() {
   const [mediaKey, setmediaKey] = useState([]);
 
   function randomTweets(tweets, tweetImages) {
-    debugger;
     const results = Math.floor(Math.random() * tweets.length);
     const imagesResults = Math.floor(Math.random() * tweetImages.length);
     setText(tweets[results].text);
     setFavorite(tweets[results].public_metrics.like_count);
     setRetweet(tweets[results].public_metrics.retweet_count);
-    // setmediaKey(tweets[results].attachments.media_keys);
-    // setdisplayTweets([tweetImages[imagesResults].media_key]);
-    if (tweets[results].attachments.media_keys) {
-      if (tweets[results].attachments.media_keys === tweetImages[imagesResults].media_key) {
-         console.log('check123')
-
-        // const array = Object.keys(tweetImages[imagesResults]);
-        // if (array.includes("url")) {
-        //   setImg(tweetImages[imagesResults].url);
-        // } else {
-        //   setImg(tweetImages[imagesResults].preview_url);
-        // }
-      } else {
-        console.log("media keys does not match");
-      }
-    }
+   
    
     const array = Object.keys(tweetImages[imagesResults]);
         if (array.includes("url")) {
@@ -59,7 +43,7 @@ function RandomTweet() {
           query: twitterHandle,
         },
       })
-      .then((response) => {
+      .then( (response) => {
         const tweets = response.data.data;
         const tweetImages = response.data.includes.media
           ? response.data.includes.media
@@ -81,9 +65,9 @@ function RandomTweet() {
   };
 
   //console.log(tweetData);
-  const Time = () => {
-    setrandomTweet("14293310");
-    handleSubmit("14293310");
+  const Fifa = () => {
+    setrandomTweet("138372303");
+    handleSubmit("138372303");
   };
 
   const villageVanguard = () => {
@@ -111,8 +95,8 @@ function RandomTweet() {
       <Navmenu />
       <div className="tweet-box">
         <h1></h1>
-        <button onClick={Time}>
-          <h1>Time</h1>
+        <button onClick={Fifa}>
+          <h1>Fifa</h1>
         </button>
         <button onClick={villageVanguard}>
           {" "}
