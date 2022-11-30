@@ -50,30 +50,41 @@ function SearchPage() {
   };
 
   const handleSubmit = () => {
-    // also check if the value entered is truthy
-
-    if (userInput.includes("@")) {
+    //also check if the value entered is truthy
+    debugger;
+    if ( userInput.match(/@([\w]+)/) ) {
       userTweets();
-    } else {
+    } else if (userInput.match(/^(\w){1,15}$/)) {
       regularTweets();
+    } else {
+       alert('Please type a relevant twitter username or userId')
     }
+
+    //console.log(userInput.length)
+
+
+    // if (userInput.includes("@")) {
+    //   userTweets();
+    // } else {
+    //   regularTweets();
+    // }
   };
 
-  // console.log("From Search:", username);
+  console.log("From Search:", username);
 
-  // console.log("From Search:", text);
+  console.log("From Search:", text);
 
-  //console.log("From Search:", img);
+  console.log("From Search:", img);
 
   const displayText = () => {
     displayImages();
     for (let i = 0; i < text.length; i++) {
       const twitterText = text[i].text;
+      console.log(twitterText); 
     }
   };
 
   const displayImages = () => {
-    debugger;
     for (let i = 0; i < img.length; i++) {
       if (img[i].url) {
         console.log(img[i].url);
