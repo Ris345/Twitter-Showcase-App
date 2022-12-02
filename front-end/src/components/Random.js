@@ -14,27 +14,62 @@ function RandomTweet() {
   const [retweet, setRetweet] = useState([]);
   const [tweetData, settweetData] = useState([]);
   const [img, setImg] = useState([]);
-  const [mediaKey, setmediaKey] = useState([]);
+  const [mediaKeys, setMediaKeys] = useState([]);
 
-  function randomTweets(tweets, tweetImages) {
+  const randomTweets = (tweets, tweetImages) => {
     const results = Math.floor(Math.random() * tweets.length);
-    const imagesResults = Math.floor(Math.random() * tweetImages.length);
+    //const imagesResults = Math.floor(Math.random() * tweetImages.length);
     setText(tweets[results].text);
     setFavorite(tweets[results].public_metrics.like_count);
     setRetweet(tweets[results].public_metrics.retweet_count);
-   
-   
-    const array = Object.keys(tweetImages[imagesResults]);
-        if (array.includes("url")) {
-          setImg(tweetImages[imagesResults].url);
-        } else {
-          setImg(tweetImages[imagesResults].preview_image_url);
-        }
+    // IF random tweet has media keys
+    const hasMediaKeys = tweets[results].attachments ? tweets[results].attachments.media_keys : null;
+    if (hasMediaKeys) {
+      // store the first media key in a variable
+      const mediaKey = [tweets[results].attachments.media_keys[0]];
+      const imageKey = tweetImages.media_key;
+       
+      // find a matchng image by searching for a matching media key
+      // const matchingImage =
+      //   mediaKey === imageKey
+      //     ? tweetImages[results].url
+      //       ? tweetImages[results].url
+      //       : tweetImages[results].preview_image_url
+      //     : null;
 
-  }
 
-  console.log("media_key from data:", mediaKey);
-  console.log("media_key from images:", displayTweets);
+      //const matchingImage = imageKey.includes(mediaKey) ? (tweetImages[imagesResults].url ? tweetImages[imagesResults].url : tweetImages[imagesResults].preview_url) : null; 
+
+      const matchingImage = tweetImages.filter(({ media_key }) => mediaKey.includes(media_key))
+     // console.log('from filter:', matchingImage[0].url)
+      
+
+
+      // console.log("check here:", matchingImage);
+      // console.log("checkkey:", tweetImages[imagesResults].media_key);
+      // if there is a matching image in tweeImages
+      if (matchingImage[0].url) {
+        // update img in state
+        setImg(matchingImage[0].url);
+      } else if (matchingImage[0].preview_image_url) {
+        setImg(matchingImage[0].preview_image_url);
+      } else {
+         setImg(null)
+      }
+    }
+
+    // const array = Object.keys(tweetImages[imagesResults]);
+    //     if (array.includes("url")) {
+    //       setImg(tweetImages[imagesResults].url);
+    //     } else {
+    //       setImg(tweetImages[imagesResults].preview_image_url);
+    //     }
+  };
+
+  // console.log("media_key from data:", mediaKeys);
+  // console.log("media_key from images:", displayTweets);
+  // console.log("img:", img);
+  console.log("tweetImages:", tweetData);
 
   const handleSubmit = (twitterHandle) => {
     axios
@@ -43,7 +78,7 @@ function RandomTweet() {
           query: twitterHandle,
         },
       })
-      .then( (response) => {
+      .then((response) => {
         const tweets = response.data.data;
         const tweetImages = response.data.includes.media
           ? response.data.includes.media

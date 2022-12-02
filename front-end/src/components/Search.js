@@ -52,16 +52,15 @@ function SearchPage() {
   const handleSubmit = () => {
     //also check if the value entered is truthy
     debugger;
-    if ( userInput.match(/@([\w]+)/) ) {
+    if (userInput.match(/@([\w]+)/)) {
       userTweets();
     } else if (userInput.match(/^(\w){1,15}$/)) {
       regularTweets();
     } else {
-       alert('Please type a relevant twitter username or userId')
+      alert("Please type a relevant twitter username or userId");
     }
 
     //console.log(userInput.length)
-
 
     // if (userInput.includes("@")) {
     //   userTweets();
@@ -80,7 +79,7 @@ function SearchPage() {
     displayImages();
     for (let i = 0; i < text.length; i++) {
       const twitterText = text[i].text;
-      console.log(twitterText); 
+      console.log(twitterText);
     }
   };
 
