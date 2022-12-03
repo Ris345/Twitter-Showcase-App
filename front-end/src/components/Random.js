@@ -23,47 +23,32 @@ function RandomTweet() {
     setFavorite(tweets[results].public_metrics.like_count);
     setRetweet(tweets[results].public_metrics.retweet_count);
     // IF random tweet has media keys
-    const hasMediaKeys = tweets[results].attachments ? tweets[results].attachments.media_keys : null;
+    const hasMediaKeys = tweets[results].attachments
+      ? tweets[results].attachments.media_keys
+      : null;
     if (hasMediaKeys) {
       // store the first media key in a variable
       const mediaKey = [tweets[results].attachments.media_keys[0]];
-      const imageKey = tweetImages.media_key;
-       
-      // find a matchng image by searching for a matching media key
-      // const matchingImage =
-      //   mediaKey === imageKey
-      //     ? tweetImages[results].url
-      //       ? tweetImages[results].url
-      //       : tweetImages[results].preview_image_url
-      //     : null;
+      //const imageKey = tweetImages.media_key;
+      const matchingImage = tweetImages.filter(({ media_key }) =>
+        mediaKey.includes(media_key)
+      );
 
-
-      //const matchingImage = imageKey.includes(mediaKey) ? (tweetImages[imagesResults].url ? tweetImages[imagesResults].url : tweetImages[imagesResults].preview_url) : null; 
-
-      const matchingImage = tweetImages.filter(({ media_key }) => mediaKey.includes(media_key))
-     // console.log('from filter:', matchingImage[0].url)
-      
-
-
-      // console.log("check here:", matchingImage);
-      // console.log("checkkey:", tweetImages[imagesResults].media_key);
-      // if there is a matching image in tweeImages
+console.log('Images:', img)
       if (matchingImage[0].url) {
         // update img in state
         setImg(matchingImage[0].url);
       } else if (matchingImage[0].preview_image_url) {
         setImg(matchingImage[0].preview_image_url);
-      } else {
-         setImg(null)
-      }
+      } 
     }
 
-    // const array = Object.keys(tweetImages[imagesResults]);
-    //     if (array.includes("url")) {
-    //       setImg(tweetImages[imagesResults].url);
-    //     } else {
-    //       setImg(tweetImages[imagesResults].preview_image_url);
-    //     }
+      
+
+
+
+
+    
   };
 
   // console.log("media_key from data:", mediaKeys);
@@ -99,28 +84,42 @@ function RandomTweet() {
       });
   };
 
-  //console.log(tweetData);
-  const Fifa = () => {
-    setrandomTweet("138372303");
-    handleSubmit("138372303");
+  const nytimes = () => {
+    if (setImg !== "") {
+      setImg(null)
+    }
+    setrandomTweet("807095");
+    handleSubmit("807095");
   };
 
   const villageVanguard = () => {
+    if (setImg !== "") {
+      setImg(null)
+    }
     setrandomTweet("3410978867");
     handleSubmit("3410978867");
   };
 
   const barackObama = () => {
+    if (setImg !== "") {
+      setImg(null)
+    }
     setrandomTweet("813286");
     handleSubmit("813286");
   };
 
   const jazzGallery = () => {
+    if (setImg !== "") {
+      setImg(null)
+    }
     setrandomTweet("22140254");
     handleSubmit("22140254");
   };
 
   const Nasa = () => {
+    if (setImg !== "") {
+      setImg(null)
+    }
     setrandomTweet("11348282");
     handleSubmit("11348282");
   };
@@ -130,8 +129,8 @@ function RandomTweet() {
       <Navmenu />
       <div className="tweet-box">
         <h1></h1>
-        <button onClick={Fifa}>
-          <h1>Fifa</h1>
+        <button onClick={nytimes}>
+          <h1>The NewYork Times</h1>
         </button>
         <button onClick={villageVanguard}>
           {" "}
