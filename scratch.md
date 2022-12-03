@@ -215,7 +215,8 @@ if matchImage.includes(url)
   setimg(preview_url)
 
 
-
+Random JS page works better than before but there are small glitches with the userName updating first 
+just need to figure this out at the end for now atlast the funcatonality is perfect. 
 
 
 

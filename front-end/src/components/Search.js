@@ -54,10 +54,8 @@ function SearchPage() {
     debugger;
     if (userInput.match(/@([\w]+)/)) {
       userTweets();
-    } else if (userInput.match(/^(\w){1,15}$/)) {
-      regularTweets();
     } else {
-      alert("Please type a relevant twitter username or userId");
+      regularTweets();
     }
 
     //console.log(userInput.length)
@@ -79,16 +77,16 @@ function SearchPage() {
     displayImages();
     for (let i = 0; i < text.length; i++) {
       const twitterText = text[i].text;
-      console.log(twitterText);
+      //console.log(twitterText);
     }
   };
 
   const displayImages = () => {
     for (let i = 0; i < img.length; i++) {
       if (img[i].url) {
-        console.log(img[i].url);
+        //console.log(img[i].url);
       } else {
-        console.log(img[i].preview_image_url);
+        // console.log(img[i].preview_image_url);
       }
     }
   };
@@ -123,7 +121,7 @@ function SearchPage() {
 
   //console.log(tweets.includes.media[0].preview_image_url)
 
-  const convertTweetObject = [...Object.values(text)];
+  //const convertTweetObject = [...Object.values(text)];
   // //const convertMediaObject = [...Object.values(tweets.includes)]
   // console.log(convertTweetObject);
   // console.log(convertTweetObject);
@@ -142,6 +140,23 @@ function SearchPage() {
   //     </div>
   //   );
   // });
+
+  const showuserTweetsbyID = text.map(({ text }) => text);
+  console.log(showuserTweetsbyID);
+
+  const showuserTweets = showuserTweetsbyID.map((text, index) => {
+    return (
+      <div key={index}>
+        <Card className="tweet-body">
+          <Card.Body>
+            <Card.Title>{text}</Card.Title>
+            {/* <Card.Text>{text.like_count}</Card.Text>
+            <Card.Text>{text.retweet_count}</Card.Text> */}
+          </Card.Body>
+        </Card>
+      </div>
+    );
+  });
 
   const convertObject = [...Object.values(tweetsContent)];
   const showTweets = convertObject.map((tweet, index) => {
@@ -185,7 +200,7 @@ function SearchPage() {
       >
         Search
       </Button>
-      <div>{showTweets}</div>
+      <div>{showuserTweets}</div>
       <Footer />
     </div>
   );

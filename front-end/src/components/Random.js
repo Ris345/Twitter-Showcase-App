@@ -7,18 +7,19 @@ import Card from "react-bootstrap/Card";
 function RandomTweet() {
   const [randomTweet, setrandomTweet] = useState({});
   const [incoming, setIncoming] = useState([]);
-  const [displayTweets, setdisplayTweets] = useState([]);
   const [user, setUser] = useState([]);
   const [favorite, setFavorite] = useState([]);
   const [text, setText] = useState([]);
   const [retweet, setRetweet] = useState([]);
   const [tweetData, settweetData] = useState([]);
   const [img, setImg] = useState([]);
-  const [mediaKeys, setMediaKeys] = useState([]);
+  
 
   const randomTweets = (tweets, tweetImages) => {
+    if (img) {
+      setImg(null);
+    }
     const results = Math.floor(Math.random() * tweets.length);
-    //const imagesResults = Math.floor(Math.random() * tweetImages.length);
     setText(tweets[results].text);
     setFavorite(tweets[results].public_metrics.like_count);
     setRetweet(tweets[results].public_metrics.retweet_count);
@@ -34,26 +35,17 @@ function RandomTweet() {
         mediaKey.includes(media_key)
       );
 
-console.log('Images:', img)
       if (matchingImage[0].url) {
         // update img in state
         setImg(matchingImage[0].url);
       } else if (matchingImage[0].preview_image_url) {
         setImg(matchingImage[0].preview_image_url);
-      } 
+      } else {
+        setImg(null);
+      }
     }
-
-      
-
-
-
-
-    
   };
 
-  // console.log("media_key from data:", mediaKeys);
-  // console.log("media_key from images:", displayTweets);
-  // console.log("img:", img);
   console.log("tweetImages:", tweetData);
 
   const handleSubmit = (twitterHandle) => {
@@ -85,41 +77,31 @@ console.log('Images:', img)
   };
 
   const nytimes = () => {
-    if (setImg !== "") {
-      setImg(null)
-    }
+    
     setrandomTweet("807095");
     handleSubmit("807095");
   };
 
   const villageVanguard = () => {
-    if (setImg !== "") {
-      setImg(null)
-    }
+    
     setrandomTweet("3410978867");
     handleSubmit("3410978867");
   };
 
   const barackObama = () => {
-    if (setImg !== "") {
-      setImg(null)
-    }
+   
     setrandomTweet("813286");
     handleSubmit("813286");
   };
 
   const jazzGallery = () => {
-    if (setImg !== "") {
-      setImg(null)
-    }
+   
     setrandomTweet("22140254");
     handleSubmit("22140254");
   };
 
   const Nasa = () => {
-    if (setImg !== "") {
-      setImg(null)
-    }
+   
     setrandomTweet("11348282");
     handleSubmit("11348282");
   };
