@@ -16,6 +16,7 @@ function SearchPage() {
   const [img, setImg] = useState([]);
   const [text, setText] = useState([]);
   const [urlImg, seturlImg] = useState([]); 
+  const [previewImages, setprevviewImages ] = useState([])
 
   const updateForm = (e) => {
     e.preventDefault();
@@ -43,6 +44,9 @@ function SearchPage() {
       ? responses.data.includes.media
       : null;
     setImg(media);
+    if (media) {
+      getMedia();
+    }
   };
   const regularTweets = () => {
     axios
@@ -61,7 +65,6 @@ function SearchPage() {
     } else {
       regularTweets();
     }
-
   };
 
   // console.log("From Search:", username);
@@ -161,14 +164,26 @@ function SearchPage() {
   //   </div>
   //   )
 
+  function getMedia() {
+    debugger; 
+    if (img) {
+      for (let i = 0; i < img.length; i++) {
+        if (tweets.includes.media[i].url) {
+          seturlImg(tweets.includes.media[i].url)
+        } else {
+          setprevviewImages(tweets.includes.media[i].preview_image_url)
+        }
+      }
+    }
+   
+  }
 
 
-
-  console.log("mainData:", tweets);
-  const urlImages = img.map(({ url }) => url) ? img.map(({ url }) => url) : null;
-   console.log(urlImages)
-   const previewurlImages = img.map(({ preview_image_url }) => preview_image_url);
-  console.log(previewurlImages);
+  // console.log("mainData:", tweets);
+  // const urlImages = img.map(({ url }) => url) ? img.map(({ url }) => url) : null;
+  //  console.log(urlImages)
+  //  const previewurlImages = img.map(({ preview_image_url }) => preview_image_url);
+  // console.log(previewurlImages);
 
 
 
@@ -186,7 +201,8 @@ function SearchPage() {
               {tweet.public_metrics.like_count}{" "}
               {tweet.public_metrics.retweet_count}
             </Card.Text>
-            <img src ={previewurlImages[0]}></img>
+            {urlImg && <img src={urlImg}></img>}
+            {previewImages && <img src={previewImages}></img>}
           </Card.Body>
         </Card>
       </div>
@@ -201,7 +217,6 @@ function SearchPage() {
         <Card className="tweet-body">
           <Card.Body>
             <Card.Title>{tweet.user.name}</Card.Title>
-            <Card.Text>{tweet.created_at.toLocaleString("en-US")}</Card.Text>
             <Card.Text>{tweet.full_text}</Card.Text>
             <Card.Text>
               {tweet.retweet_count.toLocaleString("en-US")}{" "}

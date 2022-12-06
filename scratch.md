@@ -239,4 +239,17 @@ try different ways to unpack values form object
 what if I push all the data from the destructured  object data into a new array that I map over
 
 
+Displaying images on the front-end when user searches for @username 
+step 1 get the values of the object 
+step 2 get the then push them into array 
+step 3 map over that array 
+step 4 if img url then display url 
+step 5 else display preview_image_url 
+
+
+Bug with displaying images: sometimes the images of previously searched twitter account are getting dispayed 
+only on image displays for all the 10 tweets 
+
+
+
 
