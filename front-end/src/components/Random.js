@@ -46,8 +46,7 @@ function RandomTweet() {
     }
   };
 
-  console.log("tweetImages:", tweetData);
-
+ 
   const handleSubmit = (twitterHandle) => {
     axios
       .get("api/tweets/random", {
@@ -57,9 +56,9 @@ function RandomTweet() {
       })
       .then((response) => {
         const tweets = response.data.data;
-        const tweetImages = response.data.includes.media
+        const tweetImages = response.data.includes
           ? response.data.includes.media
-          : "";
+          : null;
         const random = randomTweets(tweets, tweetImages);
         setIncoming(tweets);
         settweetData(tweetImages);

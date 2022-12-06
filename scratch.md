@@ -221,10 +221,20 @@ just need to figure this out at the end for now atlast the funcatonality is perf
 
 
 
+Display tweets on the search page 
+ 1. must find a way to unpack the data from objects
+ 2. must find a way to display data based on the search 
+ 3. if search content === regular then display regualr tweets 
+ 4. search content === @usernme then display the tweets by id 
+ 5. clear the previous tweets on the display instead 
 
 
 
+To show that the user needs to type something rlevant 
+ 1. if the responses.data.length < 1 
+     return alert(type something relevant would you this app is for you)
 
+try different ways to unpack values form object 
 
 
 

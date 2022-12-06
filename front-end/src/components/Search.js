@@ -22,6 +22,7 @@ function SearchPage() {
   };
 
   const userTweets = async () => {
+    debugger;
     const response = await axios.get("api/tweets/userid", {
       params: {
         query: userInput.slice(1),
@@ -35,8 +36,11 @@ function SearchPage() {
     });
     setTweets(responses.data);
     setText(responses.data.data);
-    setImg(responses.data.includes.media);
-    displayText();
+    const media = responses.data.includes
+      ? responses.data.includes.media
+      : null;
+    setImg(media);
+    // isTweetTruthy();
   };
 
   const regularTweets = () => {
@@ -47,49 +51,52 @@ function SearchPage() {
         },
       })
       .then((response) => setTweetscontent(response.data.statuses));
+    // isTweetTruthy();
   };
 
   const handleSubmit = () => {
     //also check if the value entered is truthy
-    debugger;
     if (userInput.match(/@([\w]+)/)) {
       userTweets();
     } else {
       regularTweets();
     }
 
-    //console.log(userInput.length)
-
-    // if (userInput.includes("@")) {
-    //   userTweets();
-    // } else {
-    //   regularTweets();
-    // }
   };
 
-  console.log("From Search:", username);
+  // console.log("From Search:", username);
 
-  console.log("From Search:", text);
+  // console.log("From Search:", text);
 
   console.log("From Search:", img);
 
-  const displayText = () => {
-    displayImages();
-    for (let i = 0; i < text.length; i++) {
-      const twitterText = text[i].text;
-      //console.log(twitterText);
-    }
-  };
+  // const isTweetTruthy = () => {
+  //   if (tweetsContent.length === 0 || tweets.length === 0) {
+  //     alert(
+  //       "Tweet not found, try again with a different username or content name"
+  //     );
+  //   } else {
+  //      return
+  //   }
+  // };
 
-  const displayImages = () => {
-    for (let i = 0; i < img.length; i++) {
-      if (img[i].url) {
-        //console.log(img[i].url);
-      } else {
-        // console.log(img[i].preview_image_url);
-      }
-    }
-  };
+  // const displayText = () => {
+  //   displayImages();
+  //   for (let i = 0; i < text.length; i++) {
+  //     const twitterText = text[i].text;
+  //     //console.log(twitterText);
+  //   }
+  // };
+
+  // const displayImages = () => {
+  //   for (let i = 0; i < img.length; i++) {
+  //     if (img[i].url) {
+  //       //console.log(img[i].url);
+  //     } else {
+  //       // console.log(img[i].preview_image_url);
+  //     }
+  //   }
+  // };
 
   //console.log("From Search:", tweetsId);
 
@@ -141,25 +148,42 @@ function SearchPage() {
   //   );
   // });
 
-  const showuserTweetsbyID = text.map(({ text }) => text);
-  console.log(showuserTweetsbyID);
+  // const test  = Object.values(tweets).map((tweet, index) => {
+  //   return (
+  //     <div key={index}>
+  //     <Card className="tweet-body">
+  //       <Card.Body>
+  //         <Card.Title>{}</Card.Title>
+  //         {/* <Card.Text>{text.like_count}</Card.Text>
+  //         <Card.Text>{text.retweet_count}</Card.Text> */}
+  //       </Card.Body>
+  //     </Card>
+  //   </div>
+  //   )
 
-  const showuserTweets = showuserTweetsbyID.map((text, index) => {
+  console.log("mainData:", tweets);
+  // const showuserTweetsbyID = img.map(({ url }) => url);
+  // console.log(showuserTweetsbyID);
+
+  const showuserTweets = Object.values(text).map((tweet, index) => {
     return (
       <div key={index}>
         <Card className="tweet-body">
           <Card.Body>
-            <Card.Title>{text}</Card.Title>
-            {/* <Card.Text>{text.like_count}</Card.Text>
-            <Card.Text>{text.retweet_count}</Card.Text> */}
+            <Card.Title>{tweet.text}</Card.Title>
+            <Card.Text>
+              {tweet.public_metrics.like_count}{" "}
+              {tweet.public_metrics.retweet_count}
+            </Card.Text>
+            <Card.Text></Card.Text>
           </Card.Body>
         </Card>
       </div>
     );
   });
 
-  const convertObject = [...Object.values(tweetsContent)];
-  const showTweets = convertObject.map((tweet, index) => {
+  //const convertObject = [...Object.values(tweetsContent)];
+  const showTweets = Object.values(tweetsContent).map((tweet, index) => {
     return (
       <div key={index}>
         <Card className="tweet-body">
@@ -200,7 +224,8 @@ function SearchPage() {
       >
         Search
       </Button>
-      <div>{showuserTweets}</div>
+      {showuserTweets && <div>{showuserTweets}</div>}
+      {showTweets && <div>{showTweets}</div>}
       <Footer />
     </div>
   );
