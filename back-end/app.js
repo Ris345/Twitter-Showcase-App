@@ -9,7 +9,7 @@ app.get("/api/tweets", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
-    url: `https://api.twitter.com/1.1/search/tweets.json?q=${user}&src=typed_query&f=live&count=15&tweet_mode=extended`,
+    url: `https://api.twitter.com/1.1/search/tweets.json?q=${user}&src=typed_query&f=live&count=10&tweet_mode=extended`,
     headers: {
       authorization: `Bearer ${process.env.TOKEN}`,
     },

@@ -236,7 +236,7 @@ To show that the user needs to type something rlevant
 
 try different ways to unpack values form object 
 
-
+what if I push all the data from the destructured  object data into a new array that I map over
 
 
 

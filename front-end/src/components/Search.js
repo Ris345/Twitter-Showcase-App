@@ -15,6 +15,7 @@ function SearchPage() {
   const [tweetsContent, setTweetscontent] = useState([]);
   const [img, setImg] = useState([]);
   const [text, setText] = useState([]);
+  const [urlImg, seturlImg] = useState([]); 
 
   const updateForm = (e) => {
     e.preventDefault();
@@ -28,6 +29,8 @@ function SearchPage() {
         query: userInput.slice(1),
       },
     });
+    const user = response.data.data.name
+    setuserName(user)
     const userId = response.data.data.id;
     const responses = await axios.get("api/tweets/idtweet", {
       params: {
@@ -40,9 +43,7 @@ function SearchPage() {
       ? responses.data.includes.media
       : null;
     setImg(media);
-    // isTweetTruthy();
   };
-
   const regularTweets = () => {
     axios
       .get("api/tweets", {
@@ -51,7 +52,6 @@ function SearchPage() {
         },
       })
       .then((response) => setTweetscontent(response.data.statuses));
-    // isTweetTruthy();
   };
 
   const handleSubmit = () => {
@@ -68,7 +68,7 @@ function SearchPage() {
 
   // console.log("From Search:", text);
 
-  console.log("From Search:", img);
+  console.log("images:", img);
 
   // const isTweetTruthy = () => {
   //   if (tweetsContent.length === 0 || tweets.length === 0) {
@@ -161,21 +161,32 @@ function SearchPage() {
   //   </div>
   //   )
 
+
+
+
   console.log("mainData:", tweets);
-  // const showuserTweetsbyID = img.map(({ url }) => url);
-  // console.log(showuserTweetsbyID);
+  const urlImages = img.map(({ url }) => url) ? img.map(({ url }) => url) : null;
+   console.log(urlImages)
+   const previewurlImages = img.map(({ preview_image_url }) => preview_image_url);
+  console.log(previewurlImages);
+
+
+
+
 
   const showuserTweets = Object.values(text).map((tweet, index) => {
+
     return (
       <div key={index}>
         <Card className="tweet-body">
           <Card.Body>
+          <Card.Text>{username}</Card.Text>
             <Card.Title>{tweet.text}</Card.Title>
             <Card.Text>
               {tweet.public_metrics.like_count}{" "}
               {tweet.public_metrics.retweet_count}
             </Card.Text>
-            <Card.Text></Card.Text>
+            <img src ={previewurlImages[0]}></img>
           </Card.Body>
         </Card>
       </div>
@@ -184,6 +195,7 @@ function SearchPage() {
 
   //const convertObject = [...Object.values(tweetsContent)];
   const showTweets = Object.values(tweetsContent).map((tweet, index) => {
+
     return (
       <div key={index}>
         <Card className="tweet-body">
