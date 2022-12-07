@@ -13,7 +13,6 @@ function RandomTweet() {
   const [retweet, setRetweet] = useState([]);
   const [tweetData, settweetData] = useState([]);
   const [img, setImg] = useState([]);
-  
 
   const randomTweets = (tweets, tweetImages) => {
     if (img) {
@@ -46,7 +45,6 @@ function RandomTweet() {
     }
   };
 
- 
   const handleSubmit = (twitterHandle) => {
     axios
       .get("api/tweets/random", {
@@ -76,31 +74,26 @@ function RandomTweet() {
   };
 
   const nytimes = () => {
-    
     setrandomTweet("807095");
     handleSubmit("807095");
   };
 
   const villageVanguard = () => {
-    
     setrandomTweet("3410978867");
     handleSubmit("3410978867");
   };
 
   const barackObama = () => {
-   
     setrandomTweet("813286");
     handleSubmit("813286");
   };
 
   const jazzGallery = () => {
-   
     setrandomTweet("22140254");
     handleSubmit("22140254");
   };
 
   const Nasa = () => {
-   
     setrandomTweet("11348282");
     handleSubmit("11348282");
   };
