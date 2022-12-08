@@ -129,7 +129,7 @@ function RandomTweet() {
             <Card.Title>{user}</Card.Title>
             <Card.Text>{text}</Card.Text>
             <Card.Text>
-              {favorite} {retweet}{" "}
+            ❤️️{favorite} {retweet}{" "}
             </Card.Text>
             <img className="tweet-image" src={img ? img : null} />
           </Card.Body>

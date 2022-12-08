@@ -251,5 +251,13 @@ Bug with displaying images: sometimes the images of previously searched twitter 
 only on image displays for all the 10 tweets 
 
 
+test cases 
+ Expected: if tweets contain img display images else null 
+ actual: all the pics are displaying with the tweet 
 
-
+Bug
+user types @marykarrlit
+clicks the search button
+entire page goes blank  
+errors: Uncaught TypeError: Cannot convert undefined or null to object
+    at Function.values (<anonymous>)

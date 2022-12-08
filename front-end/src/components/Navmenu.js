@@ -8,7 +8,7 @@ function Navmenu() {
     <div>
       <Navbar bg="info" expand="lg" variant="dark">
         <Container>
-          <Navbar.Brand href="/">Twitter Showcase</Navbar.Brand>
+          <Navbar.Brand href="/">flybird</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

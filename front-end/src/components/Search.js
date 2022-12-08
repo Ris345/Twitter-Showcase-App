@@ -22,7 +22,6 @@ function SearchPage() {
   };
 
   const userTweets = async () => {
-    debugger;
     const response = await axios.get("api/tweets/userid", {
       params: {
         query: userInput.slice(1),
@@ -38,7 +37,7 @@ function SearchPage() {
     });
     setTweets(responses.data);
     setText(responses.data.data);
-    const media = await responses.data.includes
+    const media = (await responses.data.includes)
       ? responses.data.includes.media
       : null;
     setImg(media);
@@ -63,8 +62,18 @@ function SearchPage() {
     }
   };
 
+  const tweeter = Object.values(tweets)
+  console.log(tweeter)
 
-  const showuserTweets = Object.values(text).map((tweet, index) => {
+
+
+
+console.log(img)
+
+
+
+
+  const showuserTweets = Object.values(text).map((tweet,index) => {
     return (
       <div key={index}>
         <Card className="tweet-body">
@@ -72,19 +81,21 @@ function SearchPage() {
             <Card.Text>{username}</Card.Text>
             <Card.Title>{tweet.text}</Card.Title>
             <Card.Text>
-              {tweet.public_metrics.like_count}{" "}
+              ❤️{tweet.public_metrics.like_count}{" "}
               {tweet.public_metrics.retweet_count}
             </Card.Text>
             {/* {urlImg && <img src={urlImg}></img>}
             {previewImages && <img src={previewImages}></img>} */}
-            {Object.values(img).map((tweet, index) => {
-    return (
-      <div>
-        <img src ={tweet.url || tweet.preview_image_url ? (tweet.url : tweet.preview_image_url) : null}></img>
-          </div>
-    )
-})
-}
+            {Object.values(img).map((tweet,index) => {
+              return (
+                <div key={index}>
+                    <img
+                  src={tweet.url ? tweet.url : tweet.preview_image_url}
+                  >      
+                </img>
+                </div> 
+              );
+            })}
           </Card.Body>
         </Card>
       </div>
@@ -114,8 +125,8 @@ function SearchPage() {
       <Form onSubmit={updateForm}>
         <Form.Group className="mb-3">
           <Form.Label>
-            Users can search tweets based on content or user id.
-            To search with id simply type @ symbol infront of the username example  @NASA 
+            Users can search tweets based on content or user id. To search with
+            id simply type @ symbol infront of the username example @NASA
           </Form.Label>
           <Form.Control
             className="tweet-input"
@@ -140,25 +151,21 @@ function SearchPage() {
 
 export default SearchPage;
 
+// if (media) {
+//   if (img) {
+//     for (let i = 0; i < media.length; i++) {
+//       if (tweets.includes.media[i].url) {
+//         seturlImg(tweets.includes.media[i].url);
+//         console.log(tweets.includes.media[i].url);
+//       } else {
+//         setpreviewImages(tweets.includes.media[i].preview_image_url);
+//         console.log(tweets.includes.media[i].preview_image_url);
+//       }
+//     }
+//   }
+// }
 
-
-
- // if (media) {
-    //   if (img) {
-    //     for (let i = 0; i < media.length; i++) {
-    //       if (tweets.includes.media[i].url) {
-    //         seturlImg(tweets.includes.media[i].url);
-    //         console.log(tweets.includes.media[i].url);
-    //       } else {
-    //         setpreviewImages(tweets.includes.media[i].preview_image_url);
-    //         console.log(tweets.includes.media[i].preview_image_url);
-    //       }
-    //     }
-    //   }
-    // }
-
-
-    // if (img)
+// if (img)
 //   const showTweetimages = Object.values(img).map((tweet, index) => {
 //     return (
 //       <div>
@@ -166,4 +173,3 @@ export default SearchPage;
 //           </div>
 //     )
 // })
-
