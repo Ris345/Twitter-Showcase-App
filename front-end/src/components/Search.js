@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Alert from "react-bootstrap/Alert";
 
 function SearchPage() {
   const [userInput, setuserInput] = useState();
@@ -15,6 +16,7 @@ function SearchPage() {
   const [text, setText] = useState([]);
   const [urlImg, seturlImg] = useState([]);
   const [previewImages, setpreviewImages] = useState([]);
+  const [show, setShow] = useState(false);
 
   const updateForm = (e) => {
     e.preventDefault();
@@ -22,25 +24,33 @@ function SearchPage() {
   };
 
   const userTweets = async () => {
+    debugger;
     const response = await axios.get("api/tweets/userid", {
       params: {
         query: userInput.slice(1),
       },
     });
-    const user = response.data.data.name;
-    setuserName(user);
+    if (response.data.errors) {
+      setShow(true);
+      return;
+    } else {
+      setuserName(response.data.data.name);
+    }
     const userId = response.data.data.id;
     const responses = await axios.get("api/tweets/idtweet", {
       params: {
         query: userId,
       },
     });
-    setTweets(responses.data);
-    setText(responses.data.data);
-    const media = (await responses.data.includes)
-      ? responses.data.includes.media
-      : null;
-    setImg(media);
+    // setTweets({
+    //   txt: responses.data ? responses.data.data : null,
+    //   media: responses.data.includes ? responses.data.includes.media : null,
+    // });
+    setText(responses.data ? responses.data.data : "");
+    // const media = responses.data.includes
+    //   ? responses.data.includes.media
+    //   : null;
+    setImg(responses.data.includes ? responses.data.includes.media : "");
   };
 
   const regularTweets = () => {
@@ -51,51 +61,63 @@ function SearchPage() {
         },
       })
       .then((response) => setTweetscontent(response.data.statuses));
-  };
-
-  const handleSubmit = () => {
-    //also check if the value entered is truthy
-    if (userInput.match(/@([\w]+)/)) {
-      userTweets();
-    } else {
-      regularTweets();
+    if (!tweetsContent.length) {
+      return; 
+      setShow(true);
     }
   };
 
-  const tweeter = Object.values(tweets)
-  console.log(tweeter)
+  const handleSubmit = () => {
+    // make sure user types something
+    if (!userInput) {
+      setShow(true);
+      return;
+    } else {
+      setShow(false);
+      //also check if the value entered is truthy
+      if (userInput.match(/@([\w]+)/)) {
+        userTweets();
+      } else {
+        regularTweets();
+      }
+    }
+    // clear the screen before re-render
+    if (tweetsContent) {
+      setTweetscontent("");
+    } else {
+      setText("");
+    }
+  };
 
+  //console.log(Object.values(tweets).length);
 
+  // const showAlldata = Object.values(tweets).map((item, index) => {
+  //   <div>
+  //     <p>{tweets.item}</p>
+  //   </div>;
+  // });
 
+  // const tweetImages = Object.values(img).map((tweet, index) => {
+  //   return (
+  //     <div key={index}>
+  //       <img
+  //         src={tweet.url ? tweet.url : tweet.preview_image_url}
+  //       ></img>
+  //     </div>
+  //   );
+  // })
 
-console.log(img)
-
-
-
-
-  const showuserTweets = Object.values(text).map((tweet,index) => {
+  const showuserTweets = Object.values(text).map((tweet, index) => {
     return (
       <div key={index}>
         <Card className="tweet-body">
           <Card.Body>
-            <Card.Text>{username}</Card.Text>
-            <Card.Title>{tweet.text}</Card.Title>
+            <Card.Title>{username}</Card.Title>
+            <Card.Text>{tweet.text}</Card.Text>
             <Card.Text>
-              ❤️{tweet.public_metrics.like_count}{" "}
+              {tweet.public_metrics.like_count}{" "}
               {tweet.public_metrics.retweet_count}
             </Card.Text>
-            {/* {urlImg && <img src={urlImg}></img>}
-            {previewImages && <img src={previewImages}></img>} */}
-            {Object.values(img).map((tweet,index) => {
-              return (
-                <div key={index}>
-                    <img
-                  src={tweet.url ? tweet.url : tweet.preview_image_url}
-                  >      
-                </img>
-                </div> 
-              );
-            })}
           </Card.Body>
         </Card>
       </div>
@@ -125,8 +147,16 @@ console.log(img)
       <Form onSubmit={updateForm}>
         <Form.Group className="mb-3">
           <Form.Label>
-            Users can search tweets based on content or user id. To search with
-            id simply type @ symbol infront of the username example @NASA
+            <Card className="user-body" style={{ width: "35rem" }}>
+              <Card.Body>
+                <Card.Text>
+                  Users can search tweets based on content or user id. To search
+                  with id simply type @symbol infront of the username example
+                  @NASA or simply type the name of the user example Elon Musk to
+                  search by content.
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </Form.Label>
           <Form.Control
             className="tweet-input"
@@ -142,6 +172,14 @@ console.log(img)
       >
         Search
       </Button>
+      {show && (
+        <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+          <Alert.Heading>
+            {" "}
+            0 results found please search for a valid username or keywords.
+          </Alert.Heading>
+        </Alert>
+      )}
       {showuserTweets && <div>{showuserTweets}</div>}
       {showTweets && <div>{showTweets}</div>}
       <Footer />
@@ -150,26 +188,3 @@ console.log(img)
 }
 
 export default SearchPage;
-
-// if (media) {
-//   if (img) {
-//     for (let i = 0; i < media.length; i++) {
-//       if (tweets.includes.media[i].url) {
-//         seturlImg(tweets.includes.media[i].url);
-//         console.log(tweets.includes.media[i].url);
-//       } else {
-//         setpreviewImages(tweets.includes.media[i].preview_image_url);
-//         console.log(tweets.includes.media[i].preview_image_url);
-//       }
-//     }
-//   }
-// }
-
-// if (img)
-//   const showTweetimages = Object.values(img).map((tweet, index) => {
-//     return (
-//       <div>
-//         <img src ={tweet.url ? tweet.url : tweet.preview_image_url}></img>
-//           </div>
-//     )
-// })

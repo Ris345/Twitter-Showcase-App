@@ -1,3 +1,11 @@
+html {
+    background-color:rgb(245, 251, 251);
+}
+
+body{
+    background-color:rgb(245, 251, 251)
+}
+
 .card-body{
     margin-left: auto;
     margin-right: auto;
@@ -23,12 +31,53 @@
 .tweet-body{
     margin-left: auto;
     margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto
+    margin-top: 50px;
+    margin-bottom: auto;
+    max-width: 50%;
+    
 }
 
 .tweet-image{
+    max-width: 35%;
+    max-height: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.card-body{
+   float: center;
+   display: inline-block;
+    
+}
+
+.random-images{
+    border-radius: 50%;
+    max-width: 250px;
+    display: flex;
+    border: 2px solid gray;
+}
+
+.random-images:hover{
+    cursor: pointer;
+}
+
+
+
+
+.fly-bird{
+    float: left;
+    display: inline-block;
+    max-width: auto;
+    -webkit-filter : hue-rotate(180deg);
+    filter : hue-rotate(180deg);
+}
+
+.user-body{
+    margin-left: 100%;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
     max-width: 100%;
     max-height: 100%;
-    display: block
 }

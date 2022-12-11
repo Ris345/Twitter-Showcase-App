@@ -1,16 +1,20 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import flybird from "../homepic/flybird.jpg"
+import "../App.css"; 
 
 function Content() {
   return (
-    <Card
+    <div>
+       <img className="fly-bird" src={flybird}></img>
+       <Card
       className="card-body"
       bg="info"
       text="light"
       style={{ width: "40rem", height: "30rem" }}
     >
       <Card.Body>
-        <Card.Title>flybird make things easier</Card.Title>
+        <Card.Title>flybird </Card.Title>
         <Card.Text>You maybe wandering what the heck is this box doing?
           Honestly I wander as well...but I want to show you the bigger picture. 
           Let me ask you what is your screen time?  probably a lot and so is mine. 
@@ -23,9 +27,11 @@ function Content() {
           Why make things harder when they already are, instead lets make it easier. 
           Welcome to the flybird app! 
         </Card.Text>
-        <Card.Link></Card.Link>
       </Card.Body>
     </Card>
+    </div>
+   
+  
   );
 }
 

@@ -256,8 +256,52 @@ test cases
  actual: all the pics are displaying with the tweet 
 
 Bug
-user types @marykarrlit
+user types @marykarrlit & @345Rishav 
 clicks the search button
 entire page goes blank  
 errors: Uncaught TypeError: Cannot convert undefined or null to object
     at Function.values (<anonymous>)
+
+Validate user search 
+
+step 1 let users type valid words 
+step 2 if they are not valid give them an lert message 
+
+
+validate search input 
+test cases// 
+ if the result > 0 
+  display the result 
+else 
+ alert(the twitter user u searched for does not exist); 
+
+
+
+test cases 
+Expected 
+1. user types a twitter username 
+2. user clicks the search button 
+3. tweets and images if included should display on the front-end 
+
+Actual 
+1. user types a twiter username 
+2. user clicks the search button 
+3. tweets and images should display 
+4. but all the images with one tweet displays 
+
+test cases to display if there are no results 
+Expected 
+1. user types random tweet username or content name 
+2. user clicks the search button 
+3. 0 results found 
+
+Actual 
+1. user types random userName or keywords 
+2. user clicks the search button 
+3. nothing displaying in the front-end 
+
+
+
+
+
+

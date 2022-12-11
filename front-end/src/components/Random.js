@@ -3,6 +3,15 @@ import Footer from "./Footer";
 import React, { useState } from "react";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
+import OBAMA from "../profilepics/OBAMA.jpg"
+import NASA from "../profilepics/NASA.jpg"; 
+import NYTimes from "../profilepics/NYTimes.png";
+import VillageVanguard from "../profilepics/VillageVanguard.jpg";
+import JazzGallery from "../profilepics/JazzGallery.jpg";
+import Alert from "react-bootstrap/Alert";
+
+
+
 
 function RandomTweet() {
   const [randomTweet, setrandomTweet] = useState({});
@@ -13,6 +22,7 @@ function RandomTweet() {
   const [retweet, setRetweet] = useState([]);
   const [tweetData, settweetData] = useState([]);
   const [img, setImg] = useState([]);
+  const [show,setShow] = useState(false)
 
   const randomTweets = (tweets, tweetImages) => {
     if (img) {
@@ -46,6 +56,7 @@ function RandomTweet() {
   };
 
   const handleSubmit = (twitterHandle) => {
+    setShow(true)
     axios
       .get("api/tweets/random", {
         params: {
@@ -102,40 +113,44 @@ function RandomTweet() {
     <div>
       <Navmenu />
       <div className="tweet-box">
-        <h1></h1>
-        <button onClick={nytimes}>
-          <h1>The NewYork Times</h1>
-        </button>
-        <button onClick={villageVanguard}>
-          {" "}
-          <h1>The Village Vanguard</h1>
-        </button>
-        <button onClick={barackObama}>
-          {" "}
-          <h1>Barack Obama</h1>
-        </button>
-        <button onClick={jazzGallery}>
-          {" "}
-          <h1>The Jazz Gallery</h1>
-        </button>
-        <button onClick={Nasa}>
-          {" "}
-          <h1>NASA</h1>
-        </button>
+       <img className="random-images" src={NYTimes} onClick={nytimes}>
+        </img>
+        <img src={VillageVanguard} className="random-images"   onClick={villageVanguard}>
+        </img>
+        <img className ="random-images" src={OBAMA} onClick={barackObama}>
+        </img>
+        <img src={JazzGallery} className="random-images" onClick={jazzGallery}>
+        </img>
+        <img src={NASA} className="random-images" onClick={Nasa}>
+        </img>
       </div>
       <div>
-        <Card className="tweet-body">
+        {/* <Card className="tweet-body">
           <Card.Body>
             <Card.Title>{user}</Card.Title>
             <Card.Text>{text}</Card.Text>
-            <Card.Text>
-            ❤️️{favorite} {retweet}{" "}
-            </Card.Text>
             <img className="tweet-image" src={img ? img : null} />
+            <Card.Text>
+            {favorite} {retweet}{" "}
+            </Card.Text>
           </Card.Body>
-        </Card>
+        </Card> */}
       </div>
       <Footer />
+      {show && (
+        <Alert variant="light" onClose={() => setShow(false)} dismissible>
+          <Card className="tweet-body">
+          <Card.Body>
+            <Card.Title>{user}</Card.Title>
+            <Card.Text>{text}</Card.Text>
+            <img className="tweet-image" src={img ? img : null} />
+            <Card.Text>
+            {favorite} {retweet}{" "}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        </Alert>
+      )}
     </div>
   );
 }
