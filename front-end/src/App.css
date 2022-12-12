@@ -53,16 +53,15 @@ body{
 
 .random-images{
     border-radius: 50%;
-    max-width: 250px;
+    max-width: 200px;
     display: flex;
+    justify-content: center;
     border: 2px solid gray;
 }
 
 .random-images:hover{
     cursor: pointer;
 }
-
-
 
 
 .fly-bird{

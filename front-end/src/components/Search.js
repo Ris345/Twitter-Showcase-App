@@ -24,7 +24,6 @@ function SearchPage() {
   };
 
   const userTweets = async () => {
-    debugger;
     const response = await axios.get("api/tweets/userid", {
       params: {
         query: userInput.slice(1),
@@ -51,9 +50,12 @@ function SearchPage() {
     //   ? responses.data.includes.media
     //   : null;
     setImg(responses.data.includes ? responses.data.includes.media : "");
+    console.log(responses.status)
+    console.log(responses.errors)
   };
 
   const regularTweets = () => {
+    debugger; 
     axios
       .get("api/tweets", {
         params: {
@@ -61,9 +63,12 @@ function SearchPage() {
         },
       })
       .then((response) => setTweetscontent(response.data.statuses));
-    if (!tweetsContent.length) {
-      return; 
-      setShow(true);
+      console.log(tweetsContent.length)
+    if (tweetsContent) {
+      setShow(false);
+    } else {
+      setShow(true); 
+
     }
   };
 
@@ -119,6 +124,15 @@ function SearchPage() {
               {tweet.public_metrics.retweet_count}
             </Card.Text>
           </Card.Body>
+          {Object.values(img).map((tweet, index) => {
+    return (
+      <div key={index}>
+        <img
+          src={tweet.url ? tweet.url : tweet.preview_image_url}
+        ></img>
+      </div>
+    );
+  })}
         </Card>
       </div>
     );

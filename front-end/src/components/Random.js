@@ -10,9 +10,6 @@ import VillageVanguard from "../profilepics/VillageVanguard.jpg";
 import JazzGallery from "../profilepics/JazzGallery.jpg";
 import Alert from "react-bootstrap/Alert";
 
-
-
-
 function RandomTweet() {
   const [randomTweet, setrandomTweet] = useState({});
   const [incoming, setIncoming] = useState([]);
@@ -139,7 +136,7 @@ function RandomTweet() {
       <Footer />
       {show && (
         <Alert variant="light" onClose={() => setShow(false)} dismissible>
-          <Card className="tweet-body">
+          <Card>
           <Card.Body>
             <Card.Title>{user}</Card.Title>
             <Card.Text>{text}</Card.Text>
