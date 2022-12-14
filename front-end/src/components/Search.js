@@ -17,6 +17,8 @@ function SearchPage() {
   const [urlImg, seturlImg] = useState([]);
   const [previewImages, setpreviewImages] = useState([]);
   const [show, setShow] = useState(false);
+  const [error, setErrors] = useState([]);
+  const [profImg, setprofImg] = useState([]);
 
   const updateForm = (e) => {
     e.preventDefault();
@@ -24,52 +26,46 @@ function SearchPage() {
   };
 
   const userTweets = async () => {
+    debugger;
     const response = await axios.get("api/tweets/userid", {
       params: {
         query: userInput.slice(1),
       },
     });
+
     if (response.data.errors) {
       setShow(true);
       return;
     } else {
       setuserName(response.data.data.name);
     }
+
     const userId = response.data.data.id;
     const responses = await axios.get("api/tweets/idtweet", {
       params: {
         query: userId,
       },
     });
-    // setTweets({
-    //   txt: responses.data ? responses.data.data : null,
-    //   media: responses.data.includes ? responses.data.includes.media : null,
-    // });
     setText(responses.data ? responses.data.data : "");
-    // const media = responses.data.includes
-    //   ? responses.data.includes.media
-    //   : null;
     setImg(responses.data.includes ? responses.data.includes.media : "");
-    console.log(responses.status)
-    console.log(responses.errors)
+    setprofImg(responses.data.includes ? responses.data.includes.users : "");
   };
 
   const regularTweets = () => {
-    debugger; 
+    debugger;
     axios
       .get("api/tweets", {
         params: {
           query: userInput,
         },
       })
-      .then((response) => setTweetscontent(response.data.statuses));
-      console.log(tweetsContent.length)
-    if (tweetsContent) {
-      setShow(false);
-    } else {
-      setShow(true); 
-
-    }
+      .then((response) =>
+        setTweetscontent(response.data ? response.data.statuses : "")
+      );
+    // check if the user input is valid
+    // if the search results return 0 results then notify the user
+    // else return;
+    // the error should come from the back-end
   };
 
   const handleSubmit = () => {
@@ -95,7 +91,6 @@ function SearchPage() {
   };
 
   //console.log(Object.values(tweets).length);
-
   // const showAlldata = Object.values(tweets).map((item, index) => {
   //   <div>
   //     <p>{tweets.item}</p>
@@ -117,22 +112,16 @@ function SearchPage() {
       <div key={index}>
         <Card className="tweet-body">
           <Card.Body>
-            <Card.Title>{username}</Card.Title>
+            <Card.Title>
+              {" "}
+              <img src={profImg[0].profile_image_url}></img> {username}
+            </Card.Title>
             <Card.Text>{tweet.text}</Card.Text>
             <Card.Text>
-              {tweet.public_metrics.like_count}{" "}
-              {tweet.public_metrics.retweet_count}
+              🤍 {tweet.public_metrics.like_count} {"  "}
+              ↱↲ {tweet.public_metrics.retweet_count}
             </Card.Text>
           </Card.Body>
-          {Object.values(img).map((tweet, index) => {
-    return (
-      <div key={index}>
-        <img
-          src={tweet.url ? tweet.url : tweet.preview_image_url}
-        ></img>
-      </div>
-    );
-  })}
         </Card>
       </div>
     );
@@ -143,7 +132,13 @@ function SearchPage() {
       <div key={index}>
         <Card className="tweet-body">
           <Card.Body>
-            <Card.Title>{tweet.user.name}</Card.Title>
+            <Card.Title>
+              {" "}
+              {tweet.user.profile_image_url && (
+                <img src={tweet.user.profile_image_url}></img>
+              )}{" "}
+              {tweet.user.name}
+            </Card.Title>
             <Card.Text>{tweet.full_text}</Card.Text>
             <Card.Text>
               {tweet.retweet_count.toLocaleString("en-US")}{" "}
@@ -190,7 +185,8 @@ function SearchPage() {
         <Alert variant="danger" onClose={() => setShow(false)} dismissible>
           <Alert.Heading>
             {" "}
-            0 results found please search for a valid username or keywords.
+            Oh No! 😞 0 results found please search for a valid username or
+            keywords.
           </Alert.Heading>
         </Alert>
       )}

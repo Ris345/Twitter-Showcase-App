@@ -3,8 +3,8 @@ import Footer from "./Footer";
 import React, { useState } from "react";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
-import OBAMA from "../profilepics/OBAMA.jpg"
-import NASA from "../profilepics/NASA.jpg"; 
+import OBAMA from "../profilepics/OBAMA.jpg";
+import NASA from "../profilepics/NASA.jpg";
 import NYTimes from "../profilepics/NYTimes.png";
 import VillageVanguard from "../profilepics/VillageVanguard.jpg";
 import JazzGallery from "../profilepics/JazzGallery.jpg";
@@ -19,7 +19,8 @@ function RandomTweet() {
   const [retweet, setRetweet] = useState([]);
   const [tweetData, settweetData] = useState([]);
   const [img, setImg] = useState([]);
-  const [show,setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const [profImg, setprofImg] = useState([]);
 
   const randomTweets = (tweets, tweetImages) => {
     if (img) {
@@ -53,7 +54,7 @@ function RandomTweet() {
   };
 
   const handleSubmit = (twitterHandle) => {
-    setShow(true)
+    setShow(true);
     axios
       .get("api/tweets/random", {
         params: {
@@ -68,6 +69,8 @@ function RandomTweet() {
         const random = randomTweets(tweets, tweetImages);
         setIncoming(tweets);
         settweetData(tweetImages);
+        setprofImg(response.data.includes.users[0].profile_image_url);
+        setUser(response.data.includes.users[0].name);
       });
 
     axios
@@ -76,9 +79,7 @@ function RandomTweet() {
           query: twitterHandle,
         },
       })
-      .then((response) => {
-        setUser(response.data.data.name);
-      });
+      .then((response) => {});
   };
 
   const nytimes = () => {
@@ -110,16 +111,19 @@ function RandomTweet() {
     <div>
       <Navmenu />
       <div className="tweet-box">
-       <img className="random-images" src={NYTimes} onClick={nytimes}>
-        </img>
-        <img src={VillageVanguard} className="random-images"   onClick={villageVanguard}>
-        </img>
-        <img className ="random-images" src={OBAMA} onClick={barackObama}>
-        </img>
-        <img src={JazzGallery} className="random-images" onClick={jazzGallery}>
-        </img>
-        <img src={NASA} className="random-images" onClick={Nasa}>
-        </img>
+        <img className="random-images" src={NYTimes} onClick={nytimes}></img>
+        <img
+          src={VillageVanguard}
+          className="random-images"
+          onClick={villageVanguard}
+        ></img>
+        <img className="random-images" src={OBAMA} onClick={barackObama}></img>
+        <img
+          src={JazzGallery}
+          className="random-images"
+          onClick={jazzGallery}
+        ></img>
+        <img src={NASA} className="random-images" onClick={Nasa}></img>
       </div>
       <div>
         {/* <Card className="tweet-body">
@@ -135,17 +139,21 @@ function RandomTweet() {
       </div>
       <Footer />
       {show && (
-        <Alert variant="light" onClose={() => setShow(false)} dismissible>
-          <Card>
-          <Card.Body>
-            <Card.Title>{user}</Card.Title>
-            <Card.Text>{text}</Card.Text>
-            <img className="tweet-image" src={img ? img : null} />
-            <Card.Text>
-            {favorite} {retweet}{" "}
-            </Card.Text>
-          </Card.Body>
-        </Card>
+        <Alert
+          className="alert-box"
+          variant="light"
+          onClose={() => setShow(false)}
+          dismissible
+        >
+          <Alert.Heading>
+            <img src={profImg}></img> {user}
+          </Alert.Heading>
+          <p>{text}</p>
+          <img className="tweet-image" src={img ? img : null} />
+          <p>
+            {" "}
+            🤍{favorite} {retweet}{" "}
+          </p>
         </Alert>
       )}
     </div>

@@ -18,7 +18,11 @@ app.get("/api/tweets", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-      res.send(response.data);
+      if (res.status(200)) {
+        res.send(response.data);
+      } else if (res.status(204)) {
+        res.send('no content')
+      }
     })
     .catch(function (error) {
       console.log(error);
@@ -30,7 +34,7 @@ app.get("/api/tweets/random", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
-    url: `https://api.twitter.com/2/users/${user}/tweets?tweet.fields=public_metrics&expansions=attachments.media_keys&media.fields=duration_ms,height,media_key,preview_image_url,url`,
+    url: `https://api.twitter.com/2/users/${user}/tweets?tweet.fields=public_metrics&expansions=attachments.media_keys,author_id&media.fields=duration_ms,height,media_key,preview_image_url,url&user.fields=description,profile_image_url`,
     headers: {
       authorization: `Bearer ${process.env.TOKEN}`,
     },
@@ -51,7 +55,7 @@ app.get("/api/tweets/idtweet", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
-    url: `https://api.twitter.com/2/users/${user}/tweets?tweet.fields=public_metrics&expansions=attachments.media_keys&media.fields=duration_ms,height,media_key,preview_image_url,url`,
+    url: `https://api.twitter.com/2/users/${user}/tweets?tweet.fields=public_metrics&expansions=attachments.media_keys,author_id&media.fields=duration_ms,height,media_key,preview_image_url,url&user.fields=description,profile_image_url`,
     headers: {
       authorization: `Bearer ${process.env.TOKEN}`,
     },
