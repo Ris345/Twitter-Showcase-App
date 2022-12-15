@@ -301,7 +301,17 @@ Actual
 3. nothing displaying in the front-end 
 
 
+Notes on the search page 
+1. everyitime a user types @somematching name 
+2. the whole page is going blank 
+3. because the state is getting updated and passed to the .map function 
+to avoid this I created if/else chekc to see if there are no results passing 
+but the problem is both the valid username and invalid usernames are passing. 
 
+To display an image in the search page 
+1. match the media keys if they match then retrive the image with that media key // the other approach with index does not work 
+2. find a way to match the media keys and retrive the images
+3. 
 
 
 

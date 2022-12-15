@@ -6,7 +6,7 @@ import "../App.css";
 function Content() {
   return (
     <div>
-       <img className="fly-bird" src={flybird}></img>
+       <img alt="" className="fly-bird" src={flybird}></img>
        <Card
       className="card-body"
       bg="info"
@@ -20,7 +20,7 @@ function Content() {
           Let me ask you what is your screen time?  probably a lot and so is mine. 
           This app is designed for folks like ya'll who spend countless hours
           scrolling through mindless content, maybe you ask is there a way to just see what you want
-          without having to see irrelavant posts from starngers and bots. 
+          without having to see irrelavant posts from strangers and the famous. 
           But there  is a easier way to 
           go to twitter now and just check the tweets for the users you want.
           It's that easy you just have to search for the user you want to find and there you go.

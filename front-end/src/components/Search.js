@@ -26,7 +26,6 @@ function SearchPage() {
   };
 
   const userTweets = async () => {
-    debugger;
     const response = await axios.get("api/tweets/userid", {
       params: {
         query: userInput.slice(1),
@@ -46,6 +45,13 @@ function SearchPage() {
         query: userId,
       },
     });
+    if (responses.data.meta.result_count === 0 || responses.data.errors) {
+      setShow(true);
+      return;
+    } else {
+      setShow(false);
+    }
+    setTweets(responses.data);
     setText(responses.data ? responses.data.data : "");
     setImg(responses.data.includes ? responses.data.includes.media : "");
     setprofImg(responses.data.includes ? responses.data.includes.users : "");
@@ -59,13 +65,14 @@ function SearchPage() {
           query: userInput,
         },
       })
-      .then((response) =>
-        setTweetscontent(response.data ? response.data.statuses : "")
-      );
-    // check if the user input is valid
-    // if the search results return 0 results then notify the user
-    // else return;
-    // the error should come from the back-end
+      .then((response) => {
+        setTweetscontent(response.data ? response.data.statuses : "");
+        if (response.data.statuses.length < 1) {
+          setShow(true);
+        } else {
+          setShow(false);
+        }
+      });
   };
 
   const handleSubmit = () => {
@@ -107,6 +114,20 @@ function SearchPage() {
   //   );
   // })
 
+  // const unPacktweets = Object.values(tweets)
+  // console.log(unPacktweets[1].media.preview_image_url);
+
+  //   const unpackImg = ([...Object.values(img)]);
+  //  console.log(unpackImg)
+  // const test = Object.values(tweets).map((tweet, index) => {
+  //   return (
+  //     <div key={index}>
+  //       <p></p>
+  //     </div>
+  //   );
+  // });
+
+  // there is a image here so figure it out!
   const showuserTweets = Object.values(text).map((tweet, index) => {
     return (
       <div key={index}>
@@ -114,12 +135,19 @@ function SearchPage() {
           <Card.Body>
             <Card.Title>
               {" "}
-              <img src={profImg[0].profile_image_url}></img> {username}
+              <img alt="" src={profImg[0].profile_image_url}></img> {username}
             </Card.Title>
             <Card.Text>{tweet.text}</Card.Text>
             <Card.Text>
               🤍 {tweet.public_metrics.like_count} {"  "}
-              ↱↲ {tweet.public_metrics.retweet_count}
+              {tweet.public_metrics.retweet_count}
+            </Card.Text>
+            <Card.Text>
+              <img
+                alt=""
+                className="tweet-image"
+                src={tweet.attachments ? "there is a image here" : ""}
+              ></img>
             </Card.Text>
           </Card.Body>
         </Card>
@@ -127,6 +155,7 @@ function SearchPage() {
     );
   });
 
+  // there will be no images from the keywords search so don't bother.
   const showTweets = Object.values(tweetsContent).map((tweet, index) => {
     return (
       <div key={index}>
@@ -135,14 +164,15 @@ function SearchPage() {
             <Card.Title>
               {" "}
               {tweet.user.profile_image_url && (
-                <img src={tweet.user.profile_image_url}></img>
+                <img alt="" src={tweet.user.profile_image_url}></img>
               )}{" "}
               {tweet.user.name}
             </Card.Title>
             <Card.Text>{tweet.full_text}</Card.Text>
             <Card.Text>
-              {tweet.retweet_count.toLocaleString("en-US")}{" "}
-              {tweet.favorite_count.toLocaleString("en-US")}
+              🤍 {tweet.favorite_count}
+              {"  "}
+              {tweet.retweet_count}{" "}
             </Card.Text>
           </Card.Body>
         </Card>
@@ -169,7 +199,7 @@ function SearchPage() {
           </Form.Label>
           <Form.Control
             className="tweet-input"
-            placeholder="Enter"
+            placeholder="Enter username starting with '@' or just keywords. "
             onChange={updateForm}
           />
         </Form.Group>
@@ -198,3 +228,31 @@ function SearchPage() {
 }
 
 export default SearchPage;
+
+{
+  /* <Card.Text>{tweet.attachments ? Object.values(img).map((tweet, index) => {
+    return (
+      <div key={index}>
+        {tweet.url && <img src={tweet.url}></img>}
+        {tweet.preview_image_url && <img src={tweet.preview_image_url}></img>}
+      </div>
+    );
+  }): ""}</Card.Text>
+          </Card.Body>
+        </Card> */
+}
+
+{
+  /* <Card.Text>{tweet.attachments && Object.values(img).map((tweet, index) => {
+    return (
+      <div key={index}>
+        <img
+          src={tweet.attachments ? (tweet.url ?  tweet.url : tweet.preview_image_url) : ""}
+        ></img>
+      </div>
+    );
+  })}</Card.Text> */
+}
+{
+  /* // tweet.attachments ?  look up the image and display it  show empty div  */
+}

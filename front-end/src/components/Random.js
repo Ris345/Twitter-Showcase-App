@@ -2,7 +2,6 @@ import Navmenu from "./Navmenu";
 import Footer from "./Footer";
 import React, { useState } from "react";
 import axios from "axios";
-import Card from "react-bootstrap/Card";
 import OBAMA from "../profilepics/OBAMA.jpg";
 import NASA from "../profilepics/NASA.jpg";
 import NYTimes from "../profilepics/NYTimes.png";
@@ -111,31 +110,21 @@ function RandomTweet() {
     <div>
       <Navmenu />
       <div className="tweet-box">
-        <img className="random-images" src={NYTimes} onClick={nytimes}></img>
-        <img
+        <img alt="" className="random-images" src={NYTimes} onClick={nytimes}></img>
+        <img alt=""
           src={VillageVanguard}
           className="random-images"
           onClick={villageVanguard}
         ></img>
-        <img className="random-images" src={OBAMA} onClick={barackObama}></img>
-        <img
+        <img alt="" className="random-images" src={OBAMA} onClick={barackObama}></img>
+        <img alt=""
           src={JazzGallery}
           className="random-images"
           onClick={jazzGallery}
         ></img>
-        <img src={NASA} className="random-images" onClick={Nasa}></img>
+        <img alt="" src={NASA} className="random-images" onClick={Nasa}></img>
       </div>
       <div>
-        {/* <Card className="tweet-body">
-          <Card.Body>
-            <Card.Title>{user}</Card.Title>
-            <Card.Text>{text}</Card.Text>
-            <img className="tweet-image" src={img ? img : null} />
-            <Card.Text>
-            {favorite} {retweet}{" "}
-            </Card.Text>
-          </Card.Body>
-        </Card> */}
       </div>
       <Footer />
       {show && (
@@ -146,10 +135,10 @@ function RandomTweet() {
           dismissible
         >
           <Alert.Heading>
-            <img src={profImg}></img> {user}
+            <img alt="" src={profImg}></img> {user}
           </Alert.Heading>
           <p>{text}</p>
-          <img className="tweet-image" src={img ? img : null} />
+          <img alt="" className="tweet-image" src={img ? img : null} />
           <p>
             {" "}
             🤍{favorite} {retweet}{" "}
