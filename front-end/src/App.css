@@ -1,9 +1,9 @@
 html {
-    background-color:rgb(245, 251, 251);
+    background-color:white;
 }
 
 body{
-    background-color:rgb(245, 251, 251)
+    background-color:white
 }
 
 .card-body{
@@ -56,7 +56,7 @@ body{
 
 .card-body{
    float: center;
-   display: inline-block;
+ 
     
 }
 
@@ -75,10 +75,8 @@ body{
 
 .fly-bird{
     float: left;
-    display: inline-block;
     max-width: auto;
-    -webkit-filter : hue-rotate(180deg);
-    filter : hue-rotate(180deg);
+  
 }
 
 .user-body{
@@ -98,4 +96,34 @@ body{
     margin-top: 2.5%;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); 
     border-radius: 2%;
+}
+
+
+
+.box-area{
+    margin-left: 900px;
+    margin-right: auto;
+   
+}
+
+.tweet-info{
+    margin-left: 10%;
+    margin-right: auto;
+    margin-top: 5%;
+}
+
+.intro-flybird{
+    background-color: rgb(255, 252, 252);
+    color: black;
+}
+
+.error-box{
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-image{
+    max-width: 50%;
+    max-height: 50%;
 }

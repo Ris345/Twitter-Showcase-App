@@ -9,16 +9,15 @@ import Alert from "react-bootstrap/Alert";
 
 function SearchPage() {
   const [userInput, setuserInput] = useState();
-  const [tweets, setTweets] = useState([]);
+  const [tweets, setTweets] = useState({});
   const [username, setuserName] = useState([]);
   const [tweetsContent, setTweetscontent] = useState([]);
   const [img, setImg] = useState([]);
   const [text, setText] = useState([]);
-  const [urlImg, seturlImg] = useState([]);
-  const [previewImages, setpreviewImages] = useState([]);
   const [show, setShow] = useState(false);
-  const [error, setErrors] = useState([]);
   const [profImg, setprofImg] = useState([]);
+  const [urlImg, seturlImg] = useState();
+  const [previewImg, setpreviewImg] = useState();
 
   const updateForm = (e) => {
     e.preventDefault();
@@ -26,12 +25,12 @@ function SearchPage() {
   };
 
   const userTweets = async () => {
+    debugger;
     const response = await axios.get("api/tweets/userid", {
       params: {
         query: userInput.slice(1),
       },
     });
-
     if (response.data.errors) {
       setShow(true);
       return;
@@ -55,10 +54,26 @@ function SearchPage() {
     setText(responses.data ? responses.data.data : "");
     setImg(responses.data.includes ? responses.data.includes.media : "");
     setprofImg(responses.data.includes ? responses.data.includes.users : "");
+    // for (let i = 0; i < responses.data.data.length; i++){
+    //   const checkMedia = responses.data.data[i].attachments.media_keys[0]
+    //   for (let j = 0; j < responses.data.includes.media.length; j++){
+    //     if (checkMedia === responses.data.includes.media[j].media_key) {
+    //       //setTest(responses.data.includes.media[j].url ? responses.data.includes.media[j].url : responses.data.includes.media[j].preview_image_url)
+    //       if (responses.data.includes.media[j].url) {
+    //         seturlImg(responses.data.includes.media[j].url)
+    //       } else {
+    //          setpreviewImg(responses.data.includes.media[j].preview_image_url)
+    //       }
+    //     }
+    //   }
+    // }
   };
 
+  // console.log('urlImg:', urlImg)
+
+  // console.log('previewImg:' , previewImg)
+
   const regularTweets = () => {
-    debugger;
     axios
       .get("api/tweets", {
         params: {
@@ -97,18 +112,22 @@ function SearchPage() {
     }
   };
 
-  //console.log(Object.values(tweets).length);
-  // const showAlldata = Object.values(tweets).map((item, index) => {
-  //   <div>
-  //     <p>{tweets.item}</p>
-  //   </div>;
-  // });
+  //   const unPack = (Object.values(tweets))
 
-  // const tweetImages = Object.values(img).map((tweet, index) => {
+  //   //console.log(Object.values(tweets).length);
+  //   const showAlldata = Object.values(unPack).flatMap((item, index) => {
+  //     <div key={index}>
+  //       <p>{item.text}</p>
+  //     </div>;
+  //   });
+
+  // console.log(showAlldata)
+
+  // const tweetImages = Object.values(img).flatMap((tweet, index) => {
   //   return (
   //     <div key={index}>
-  //       <img
-  //         src={tweet.url ? tweet.url : tweet.preview_image_url}
+  //       <img alt="" className="tweet-image"
+  //         src={tweet.media_keys ? tweet.url : tweet.preview_image_url}
   //       ></img>
   //     </div>
   //   );
@@ -127,7 +146,11 @@ function SearchPage() {
   //   );
   // });
 
-  // there is a image here so figure it out!
+  // const imgObj = (tweets.includes.media)
+  // const { media_key } = imgObj
+  // console.log(media_key)
+
+  // there is an image here so figure it out!
   const showuserTweets = Object.values(text).map((tweet, index) => {
     return (
       <div key={index}>
@@ -142,20 +165,15 @@ function SearchPage() {
               🤍 {tweet.public_metrics.like_count} {"  "}
               {tweet.public_metrics.retweet_count}
             </Card.Text>
-            <Card.Text>
-              <img
-                alt=""
-                className="tweet-image"
-                src={tweet.attachments ? "there is a image here" : ""}
-              ></img>
-            </Card.Text>
           </Card.Body>
+          {/* <img alt="" src={tweet.attachments ? urlImg : previewImg ? !tweet.attachments : ""}> */}
+          {/* </img> */}
         </Card>
       </div>
     );
   });
 
-  // there will be no images from the keywords search so don't bother.
+  // display for search keywords
   const showTweets = Object.values(tweetsContent).map((tweet, index) => {
     return (
       <div key={index}>
@@ -186,16 +204,7 @@ function SearchPage() {
       <Form onSubmit={updateForm}>
         <Form.Group className="mb-3">
           <Form.Label>
-            <Card className="user-body" style={{ width: "35rem" }}>
-              <Card.Body>
-                <Card.Text>
-                  Users can search tweets based on content or user id. To search
-                  with id simply type @symbol infront of the username example
-                  @NASA or simply type the name of the user example Elon Musk to
-                  search by content.
-                </Card.Text>
-              </Card.Body>
-            </Card>
+            <div className="box-area">Search</div>
           </Form.Label>
           <Form.Control
             className="tweet-input"
@@ -205,14 +214,25 @@ function SearchPage() {
         </Form.Group>
       </Form>
       <Button
+        style={{ width: "20rem" }}
         className="search-button"
         onClick={handleSubmit}
         variant="outline-dark"
       >
         Search
       </Button>
+      <div className="tweet-info">
+        Users can search tweets based on content or user id. To search with id
+        simply type @symbol infront of the username example @NASA or simply type
+        the name of the user example Elon Musk to search by content.
+      </div>
       {show && (
-        <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+        <Alert
+          className="error-box"
+          variant="danger"
+          onClose={() => setShow(false)}
+          dismissible
+        >
           <Alert.Heading>
             {" "}
             Oh No! 😞 0 results found please search for a valid username or
@@ -228,31 +248,3 @@ function SearchPage() {
 }
 
 export default SearchPage;
-
-{
-  /* <Card.Text>{tweet.attachments ? Object.values(img).map((tweet, index) => {
-    return (
-      <div key={index}>
-        {tweet.url && <img src={tweet.url}></img>}
-        {tweet.preview_image_url && <img src={tweet.preview_image_url}></img>}
-      </div>
-    );
-  }): ""}</Card.Text>
-          </Card.Body>
-        </Card> */
-}
-
-{
-  /* <Card.Text>{tweet.attachments && Object.values(img).map((tweet, index) => {
-    return (
-      <div key={index}>
-        <img
-          src={tweet.attachments ? (tweet.url ?  tweet.url : tweet.preview_image_url) : ""}
-        ></img>
-      </div>
-    );
-  })}</Card.Text> */
-}
-{
-  /* // tweet.attachments ?  look up the image and display it  show empty div  */
-}

@@ -313,5 +313,8 @@ To display an image in the search page
 2. find a way to match the media keys and retrive the images
 3. 
 
-
+Display images on the searchpage 
+1. if the tweet has images then the tweet also has images 
+2. match the media keys from .includes and tweet file directly to display the correct image 
+3. else display an empty div 
 
