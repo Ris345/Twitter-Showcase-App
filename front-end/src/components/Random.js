@@ -110,22 +110,33 @@ function RandomTweet() {
     <div>
       <Navmenu />
       <div className="tweet-box">
-        <img alt="" className="random-images" src={NYTimes} onClick={nytimes}></img>
-        <img alt=""
+        <img
+          alt=""
+          className="random-images"
+          src={NYTimes}
+          onClick={nytimes}
+        ></img>
+        <img
+          alt=""
           src={VillageVanguard}
           className="random-images"
           onClick={villageVanguard}
         ></img>
-        <img alt="" className="random-images" src={OBAMA} onClick={barackObama}></img>
-        <img alt=""
+        <img
+          alt=""
+          className="random-images"
+          src={OBAMA}
+          onClick={barackObama}
+        ></img>
+        <img
+          alt=""
           src={JazzGallery}
           className="random-images"
           onClick={jazzGallery}
         ></img>
         <img alt="" src={NASA} className="random-images" onClick={Nasa}></img>
       </div>
-      <div>
-      </div>
+      <div></div>
       <Footer />
       {show && (
         <Alert

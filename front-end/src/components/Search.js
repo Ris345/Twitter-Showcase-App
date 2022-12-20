@@ -16,8 +16,8 @@ function SearchPage() {
   const [text, setText] = useState([]);
   const [show, setShow] = useState(false);
   const [profImg, setprofImg] = useState([]);
-  const [urlImg, seturlImg] = useState();
-  const [previewImg, setpreviewImg] = useState();
+  const [urlImg, seturlImg] = useState([]);
+  const [prevImg, setprevImg] = useState([]);
 
   const updateForm = (e) => {
     e.preventDefault();
@@ -35,7 +35,7 @@ function SearchPage() {
       setShow(true);
       return;
     } else {
-      setuserName(response.data.data.name);
+      setuserName(response.data.data.username);
     }
 
     const userId = response.data.data.id;
@@ -52,26 +52,36 @@ function SearchPage() {
     }
     setTweets(responses.data);
     setText(responses.data ? responses.data.data : "");
-    setImg(responses.data.includes ? responses.data.includes.media : "");
+    setImg(responses.data.includes ? responses.data.includes.media : []);
     setprofImg(responses.data.includes ? responses.data.includes.users : "");
-    // for (let i = 0; i < responses.data.data.length; i++){
-    //   const checkMedia = responses.data.data[i].attachments.media_keys[0]
-    //   for (let j = 0; j < responses.data.includes.media.length; j++){
-    //     if (checkMedia === responses.data.includes.media[j].media_key) {
-    //       //setTest(responses.data.includes.media[j].url ? responses.data.includes.media[j].url : responses.data.includes.media[j].preview_image_url)
-    //       if (responses.data.includes.media[j].url) {
-    //         seturlImg(responses.data.includes.media[j].url)
-    //       } else {
-    //          setpreviewImg(responses.data.includes.media[j].preview_image_url)
-    //       }
-    //     }
-    //   }
-    // }
+
+    // check if tweet has media
+    if (responses.data.includes.media) {
+      for (let i = 0; i < responses.data.data.length; i++) {
+        if (responses.data.data[i].attachments) {
+          const hasMediaKeys = responses.data.data[i].attachments.media_keys[0];
+          const imgFilt = responses.data.includes.media;
+          const matchingImage = imgFilt.filter(({ media_key }) =>
+            hasMediaKeys.includes(media_key)
+          );
+          const urlTest = matchingImage[0].url ? matchingImage[0].url : "";
+          console.log("urlTest:", urlTest);
+          seturlImg(urlTest);
+          const anotherVar = matchingImage[0].preview_image_url
+            ? matchingImage[0].preview_image_url
+            : "";
+          setprevImg(anotherVar);
+        } else {
+          setprevImg(null);
+          seturlImg(null);
+        }
+      }
+    }
   };
 
-  // console.log('urlImg:', urlImg)
-
-  // console.log('previewImg:' , previewImg)
+  // console.log('img:', img)
+  // console.log("urlImg:", urlImg);
+  // console.log("prevImg,:", prevImg);
 
   const regularTweets = () => {
     axios
@@ -91,6 +101,11 @@ function SearchPage() {
   };
 
   const handleSubmit = () => {
+    //clear old images
+    if (urlImg || prevImg) {
+      seturlImg("");
+      setprevImg("");
+    }
     // make sure user types something
     if (!userInput) {
       setShow(true);
@@ -123,15 +138,25 @@ function SearchPage() {
 
   // console.log(showAlldata)
 
-  // const tweetImages = Object.values(img).flatMap((tweet, index) => {
-  //   return (
-  //     <div key={index}>
-  //       <img alt="" className="tweet-image"
-  //         src={tweet.media_keys ? tweet.url : tweet.preview_image_url}
-  //       ></img>
-  //     </div>
-  //   );
-  // })
+  const tweetImages = Object.values(img).map((tweet, index) => {
+    return (
+      <div key={index}>
+        <img
+          alt=""
+          className="tweet-image"
+          src={
+            tweet.media_key
+              ? tweet.url
+              : tweet.preview_image_url
+              ? !tweet.media_key
+              : ""
+          }
+        ></img>
+      </div>
+    );
+  });
+
+  console.log(tweetImages);
 
   // const unPacktweets = Object.values(tweets)
   // console.log(unPacktweets[1].media.preview_image_url);
@@ -163,11 +188,16 @@ function SearchPage() {
             <Card.Text>{tweet.text}</Card.Text>
             <Card.Text>
               🤍 {tweet.public_metrics.like_count} {"  "}
-              {tweet.public_metrics.retweet_count}
+              Retweet {tweet.public_metrics.retweet_count} replies{" "}
+              {tweet.public_metrics.reply_count}
             </Card.Text>
           </Card.Body>
-          {/* <img alt="" src={tweet.attachments ? urlImg : previewImg ? !tweet.attachments : ""}> */}
-          {/* </img> */}
+          {/* <img
+            alt=""
+            className="tweet-image"
+            src={tweet.attachments ? tweetImages : ""}
+          ></img>  */}
+        <div>{tweet.attachments ? tweetImages : ""}</div> 
         </Card>
       </div>
     );
