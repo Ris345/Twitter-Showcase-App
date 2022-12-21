@@ -69,7 +69,7 @@ function RandomTweet() {
         setIncoming(tweets);
         settweetData(tweetImages);
         setprofImg(response.data.includes.users[0].profile_image_url);
-        setUser(response.data.includes.users[0].name);
+        setUser(response.data.includes.users[0].username);
       });
 
     axios
@@ -152,7 +152,7 @@ function RandomTweet() {
           <img alt="" className="tweet-image" src={img ? img : null} />
           <p>
             {" "}
-            🤍{favorite} {retweet}{" "}
+            ♡{favorite} ⟳{retweet} 
           </p>
         </Alert>
       )}

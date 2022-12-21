@@ -54,7 +54,6 @@ function SearchPage() {
     setText(responses.data ? responses.data.data : "");
     setImg(responses.data.includes ? responses.data.includes.media : []);
     setprofImg(responses.data.includes ? responses.data.includes.users : "");
-
     // check if tweet has media
     if (responses.data.includes.media) {
       for (let i = 0; i < responses.data.data.length; i++) {
@@ -64,13 +63,15 @@ function SearchPage() {
           const matchingImage = imgFilt.filter(({ media_key }) =>
             hasMediaKeys.includes(media_key)
           );
-          const urlTest = matchingImage[0].url ? matchingImage[0].url : "";
-          console.log("urlTest:", urlTest);
-          seturlImg(urlTest);
-          const anotherVar = matchingImage[0].preview_image_url
-            ? matchingImage[0].preview_image_url
-            : "";
-          setprevImg(anotherVar);
+          console.log(matchingImage);
+          // try running a for loop for the matchingIMage
+          for (let i = 0; i < matchingImage.length; i++) {
+            if (matchingImage[i].url) {
+              seturlImg(matchingImage[i].url);
+            } else {
+              setprevImg(matchingImage[i].preview_image_url);
+            }
+          }
         } else {
           setprevImg(null);
           seturlImg(null);
@@ -79,9 +80,7 @@ function SearchPage() {
     }
   };
 
-  // console.log('img:', img)
-  // console.log("urlImg:", urlImg);
-  // console.log("prevImg,:", prevImg);
+  //console.log(img[0].url);
 
   const regularTweets = () => {
     axios
@@ -127,56 +126,10 @@ function SearchPage() {
     }
   };
 
-  //   const unPack = (Object.values(tweets))
-
-  //   //console.log(Object.values(tweets).length);
-  //   const showAlldata = Object.values(unPack).flatMap((item, index) => {
-  //     <div key={index}>
-  //       <p>{item.text}</p>
-  //     </div>;
-  //   });
-
-  // console.log(showAlldata)
-
-  const tweetImages = Object.values(img).map((tweet, index) => {
-    return (
-      <div key={index}>
-        <img
-          alt=""
-          className="tweet-image"
-          src={
-            tweet.media_key
-              ? tweet.url
-              : tweet.preview_image_url
-              ? !tweet.media_key
-              : ""
-          }
-        ></img>
-      </div>
-    );
-  });
-
-  console.log(tweetImages);
-
-  // const unPacktweets = Object.values(tweets)
-  // console.log(unPacktweets[1].media.preview_image_url);
-
-  //   const unpackImg = ([...Object.values(img)]);
-  //  console.log(unpackImg)
-  // const test = Object.values(tweets).map((tweet, index) => {
-  //   return (
-  //     <div key={index}>
-  //       <p></p>
-  //     </div>
-  //   );
-  // });
-
-  // const imgObj = (tweets.includes.media)
-  // const { media_key } = imgObj
-  // console.log(media_key)
-
   // there is an image here so figure it out!
   const showuserTweets = Object.values(text).map((tweet, index) => {
+    // const imgShow = tweet.attachments ? img[index].url : null;
+    // const showImg = tweet.attchments ? img[index].preview_image_url : null;
     return (
       <div key={index}>
         <Card className="tweet-body">
@@ -187,17 +140,15 @@ function SearchPage() {
             </Card.Title>
             <Card.Text>{tweet.text}</Card.Text>
             <Card.Text>
-              🤍 {tweet.public_metrics.like_count} {"  "}
-              Retweet {tweet.public_metrics.retweet_count} replies{" "}
-              {tweet.public_metrics.reply_count}
+              ♡ {tweet.public_metrics.like_count} {"  "}⟳{" "}
+              {tweet.public_metrics.retweet_count}
             </Card.Text>
           </Card.Body>
           {/* <img
             alt=""
             className="tweet-image"
-            src={tweet.attachments ? tweetImages : ""}
-          ></img>  */}
-        <div>{tweet.attachments ? tweetImages : ""}</div> 
+            src={tweet.attachments ? imgShow : showImg}
+          ></img> */}
         </Card>
       </div>
     );
@@ -218,9 +169,8 @@ function SearchPage() {
             </Card.Title>
             <Card.Text>{tweet.full_text}</Card.Text>
             <Card.Text>
-              🤍 {tweet.favorite_count}
-              {"  "}
-              {tweet.retweet_count}{" "}
+              ♡ {tweet.favorite_count}
+              {"  "}⟳{tweet.retweet_count}{" "}
             </Card.Text>
           </Card.Body>
         </Card>
