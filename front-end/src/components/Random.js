@@ -152,7 +152,7 @@ function RandomTweet() {
           <img alt="" className="tweet-image" src={img ? img : null} />
           <p>
             {" "}
-            ♡{favorite} ⟳{retweet} 
+            ♡{favorite} ⇆{retweet}
           </p>
         </Alert>
       )}

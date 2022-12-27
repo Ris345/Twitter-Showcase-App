@@ -21,19 +21,19 @@ app.get("/api/tweets", (req, res) => {
       if (res.status(200) || res.status(201)) {
         res.send(response.data);
       } else if (res.status(204)) {
-        res.send({status:204, message:'no content'})
+        res.send({ status: 204, message: "no content" });
       } else if (res.status(400)) {
-        res.send({ status: 400, message:'bad request'})
+        res.send({ status: 400, message: "bad request" });
       } else if (res.status(401)) {
-         res.send({status: 401, message:'unauthorized'})
+        res.send({ status: 401, message: "unauthorized" });
       } else if (res.status(403)) {
-         res.send({status: 403, message:'forbidden'})
+        res.send({ status: 403, message: "forbidden" });
       } else if (res.status(404)) {
-         res.send({status: 404, message: 'no found' })
+        res.send({ status: 404, message: "no found" });
       } else if (res.status(500)) {
-        res.send({status: 500, message:'internal server error'})
+        res.send({ status: 500, message: "internal server error" });
       } else {
-         res.send({message: 'other error'})
+        res.send({ message: "other error" });
       }
     })
     .catch(function (error) {
@@ -79,19 +79,19 @@ app.get("/api/tweets/idtweet", (req, res) => {
       if (res.status(200) || res.status(201)) {
         res.send(response.data);
       } else if (res.status(204)) {
-        res.send({status:204, message:'no content'})
+        res.send({ status: 204, message: "no content" });
       } else if (res.status(400)) {
-        res.send({ status: 400, message:'bad request'})
+        res.send({ status: 400, message: "bad request" });
       } else if (res.status(401)) {
-         res.send({status: 401, message:'unauthorized'})
+        res.send({ status: 401, message: "unauthorized" });
       } else if (res.status(403)) {
-         res.send({status: 403, message:'forbidden'})
+        res.send({ status: 403, message: "forbidden" });
       } else if (res.status(404)) {
-         res.send({status: 404, message: 'no found' })
+        res.send({ status: 404, message: "no found" });
       } else if (res.status(500)) {
-        res.send({status: 500, message:'internal server error'})
+        res.send({ status: 500, message: "internal server error" });
       } else {
-         res.send({message: 'other error'})
+        res.send({ message: "other error" });
       }
     })
     .catch(function (error) {
@@ -141,7 +141,6 @@ app.get("/api/tweets/userid", (req, res) => {
     });
 });
 
-
-app.listen(3001, () => {
+app.listen(3001 || process.env.PORT, () => {
   console.log(`valid repsonse on port 3001`);
 });
