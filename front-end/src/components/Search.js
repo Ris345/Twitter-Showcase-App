@@ -98,7 +98,7 @@ function SearchPage() {
     }
   };
 
-  console.log(tweets)
+  console.log(tweets);
 
   // there is an image here so figure it out!
   const showuserTweets = Object.values(text).map((tweet, index) => {
