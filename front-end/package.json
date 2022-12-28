@@ -42,6 +42,6 @@
   },
   "devDependencies": {
     "cra-build-watch": "^3.4.0"
-  },
-  "proxy": "http://localhost:3001/"
+  }
+  // "proxy": "http://localhost:3001/"
 }
