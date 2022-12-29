@@ -47,8 +47,8 @@ body{
 }
 
 .tweet-image{
-    max-width: 35%;
-    max-height: 25%;
+    max-width: 45%;
+    max-height: auto;
     margin-left: auto;
     margin-right: auto;
     display: block;
