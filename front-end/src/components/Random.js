@@ -52,6 +52,11 @@ function RandomTweet() {
     }
   };
 
+  console.log(randomTweet)
+  console.log(incoming)
+  console.log(tweetData)
+
+
   const handleSubmit = (twitterHandle) => {
     setShow(true);
     axios
@@ -66,6 +71,7 @@ function RandomTweet() {
           ? response.data.includes.media
           : null;
         const random = randomTweets(tweets, tweetImages);
+        console.log(random)
         setIncoming(tweets);
         settweetData(tweetImages);
         setprofImg(response.data.includes.users[0].profile_image_url);

@@ -22,7 +22,6 @@ function SearchPage() {
   };
 
   const userTweets = async () => {
-    debugger;
     const response = await axios.get("api/tweets/userid", {
       params: {
         query: userInput.slice(1),
@@ -100,7 +99,6 @@ function SearchPage() {
 
   console.log(tweets);
 
-  // there is an image here so figure it out!
   const showuserTweets = Object.values(text).map((tweet, index) => {
     return (
       <div key={index}>
