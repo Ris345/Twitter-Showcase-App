@@ -304,5 +304,3 @@ Display images in the search page with the rest of the tweets---
 2. if tweet has attachments then loop over the tweet
 3. then loop over the index of each attachments
 4. instead of filtering let run a loop to see if each media keys match then return the images that ahs same media keys.
-
-
