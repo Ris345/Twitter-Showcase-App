@@ -43,5 +43,5 @@
   "devDependencies": {
     "cra-build-watch": "^3.4.0"
   },
-  "proxy": "https://twitterapp-nfle.onrender.com/"
+  "proxy": "http://localhost:3001/"
 }
