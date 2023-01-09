@@ -5,7 +5,7 @@ const axios = require("axios");
 require("dotenv").config();
 
 //  gets tweets with regular search
-app.get("/api/tweets", (req, res) => {
+app.get("https://twitterapp-nfle.onrender.com/api/tweets", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
@@ -42,7 +42,7 @@ app.get("/api/tweets", (req, res) => {
 });
 
 // gets random tweet from specified user
-app.get("/api/tweets/random", (req, res) => {
+app.get("https://twitterapp-nfle.onrender.com/api/tweets/random", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
@@ -63,7 +63,7 @@ app.get("/api/tweets/random", (req, res) => {
 });
 
 // gets tweets based on the id of the user
-app.get("/api/tweets/idtweet", (req, res) => {
+app.get("https://twitterapp-nfle.onrender.com//api/tweets/idtweet", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
@@ -100,7 +100,7 @@ app.get("/api/tweets/idtweet", (req, res) => {
 });
 
 // user name with random id
-app.get("/api/tweets/randomid", (req, res) => {
+app.get("https://twitterapp-nfle.onrender.com//api/tweets/randomid", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
@@ -121,7 +121,7 @@ app.get("/api/tweets/randomid", (req, res) => {
 });
 
 // get user to get the user id
-app.get("/api/tweets/userid", (req, res) => {
+app.get("https://twitterapp-nfle.onrender.com//api/tweets/userid", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
@@ -141,8 +141,7 @@ app.get("/api/tweets/userid", (req, res) => {
     });
 });
 
-const port = process.env.PORT || 3001
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 3001, () => {
   console.log(`valid repsonse on port 3001`);
 });
