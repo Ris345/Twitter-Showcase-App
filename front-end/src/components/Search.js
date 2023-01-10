@@ -58,7 +58,6 @@ function SearchPage() {
     setprofImg(responses.data.includes ? responses.data.includes.users : "");
   };
 
-  
   const regularTweets = () => {
     axios
       .get("api/tweets", {

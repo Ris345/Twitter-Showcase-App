@@ -140,9 +140,10 @@ app.get("/api/tweets/userid", (req, res) => {
     });
 });
 
+app.use('/', express.static('build'))
 
+const port = process.env.PORT || 3001;
 
-
-app.listen(process.env.PORT || 3001, () => {
-  console.log(`valid repsonse on port 3001`);
+app.listen(port, () => {
+  console.log(`valid repsonse on port ${port}`);
 });
