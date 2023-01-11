@@ -72,6 +72,7 @@ app.get("/api/tweets/idtweet", (req, res) => {
     },
   };
 
+
   axios
     .request(options)
     .then(function (response) {
@@ -140,7 +141,7 @@ app.get("/api/tweets/userid", (req, res) => {
     });
 });
 
-app.use('/', express.static('build'))
+app.use('/', express.static('/build'))
 
 const port = process.env.PORT || 3001;
 
