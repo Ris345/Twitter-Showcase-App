@@ -3,6 +3,9 @@ const app = express();
 const axios = require("axios");
 require("dotenv").config();
 
+app.use(express.static('build'));
+
+
 //  gets tweets with regular search
 app.get("/api/tweets", (req, res) => {
   const user = req.query.query;
@@ -146,7 +149,7 @@ app.get("/api/tweets/userid", (req, res) => {
     });
 });
 
-app.use('/', express.static('build'))
+
 
 const port = process.env.PORT || 3001;
 
