@@ -17,6 +17,7 @@ app.get("/api/tweets", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
+      console.log('axios request 1: ',response.data)
       if (res.status(200) || res.status(201)) {
         res.send(response.data);
       } else if (res.status(204)) {
@@ -54,6 +55,7 @@ app.get("/api/tweets/random", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
+      console.log('axios request 2:' ,response.data);
       res.send(response.data);
     })
     .catch(function (error) {
@@ -76,6 +78,7 @@ app.get("/api/tweets/idtweet", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
+      console.log('axios request 3:' ,response.data)
       if (res.status(200) || res.status(201)) {
         res.send(response.data);
       } else if (res.status(204)) {
@@ -113,6 +116,7 @@ app.get("/api/tweets/randomid", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
+      console.log('axios request 4:' ,response.data);
       res.send(response.data);
     })
     .catch(function (error) {
@@ -134,6 +138,7 @@ app.get("/api/tweets/userid", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
+      console.log('axios request 5:', response.data);
       res.send(response.data);
     })
     .catch(function (error) {
