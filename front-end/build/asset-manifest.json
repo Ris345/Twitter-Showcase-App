@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0298776d.css",
+    "main.js": "/static/js/main.db6b8f5f.js",
+    "static/media/flybird.jpg": "/static/media/flybird.dcbfbb8fbd22563c9f20.jpg",
+    "static/media/NASA.jpg": "/static/media/NASA.6b74298120924e285dc2.jpg",
+    "static/media/JazzGallery.jpg": "/static/media/JazzGallery.d7c8aeaecd31b2ffc11f.jpg",
+    "static/media/VillageVanguard.jpg": "/static/media/VillageVanguard.48668101760636e46c80.jpg",
+    "static/media/NYTimes.png": "/static/media/NYTimes.9313352511ea7a688a7a.png",
+    "static/media/OBAMA.jpg": "/static/media/OBAMA.f634d69cd8e25897f482.jpg",
+    "index.html": "/index.html",
+    "main.0298776d.css.map": "/static/css/main.0298776d.css.map",
+    "main.db6b8f5f.js.map": "/static/js/main.db6b8f5f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0298776d.css",
+    "static/js/main.db6b8f5f.js"
+  ]
+}
