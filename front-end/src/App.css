@@ -56,8 +56,8 @@ body{
 
 .card-body{
    float: center;
-   
    border-radius: 25%;
+   margin-bottom: 15px;
     
 }
 
@@ -114,7 +114,7 @@ body{
 }
 
 .intro-flybird{
-    color: rgb(148, 148, 148);
+    color: rgb(55, 55, 55);
     float: center;
 }
 

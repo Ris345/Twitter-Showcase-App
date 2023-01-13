@@ -7,7 +7,6 @@ app.use("/", express.static("./front-end/build"));
 app.use("/Random", express.static("./front-end/build"));
 app.use("/Search", express.static("./front-end/build"));
 
-
 //  gets tweets with regular search
 app.get("/Search/api/tweets", (req, res) => {
   const user = req.query.query;
@@ -22,7 +21,6 @@ app.get("/Search/api/tweets", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-
       if (res.status(200) || res.status(201)) {
         res.send(response.data);
       } else if (res.status(204)) {
@@ -60,7 +58,6 @@ app.get("/Random/api/tweets/random", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-
       res.send(response.data);
     })
     .catch(function (error) {
@@ -82,7 +79,6 @@ app.get("/Search/api/tweets/idtweet", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-
       if (res.status(200) || res.status(201)) {
         res.send(response.data);
       } else if (res.status(204)) {
@@ -120,7 +116,6 @@ app.get("/Random/api/tweets/randomid", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-
       res.send(response.data);
     })
     .catch(function (error) {
@@ -142,7 +137,6 @@ app.get("/Search/api/tweets/userid", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-
       res.send(response.data);
     })
     .catch(function (error) {
