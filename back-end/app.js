@@ -4,7 +4,7 @@ const axios = require("axios");
 require("dotenv").config();
 
 
-app.use('/static', express.static('build'));
+app.use('/', express.static('build'));
 
 
 
