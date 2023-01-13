@@ -2,10 +2,9 @@ const express = require("express");
 const app = express();
 const axios = require("axios");
 require("dotenv").config();
-const path = require('path')
 
 
-app.use('/static', express.static(path.join(__dirname, 'build')))
+app.use('/static', express.static('build'));
 
 
 
