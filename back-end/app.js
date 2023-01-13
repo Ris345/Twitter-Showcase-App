@@ -4,7 +4,7 @@ const axios = require("axios");
 require("dotenv").config();
 
 app.use("/", express.static("./front-end/build"));
-app.use("/api/tweets/", express.static("./front-end/build"));
+app.use("/api/tweets/random", express.static("./front-end/build"));
 
 //  gets tweets with regular search
 app.get("/api/tweets", (req, res) => {
