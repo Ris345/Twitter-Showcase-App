@@ -60,7 +60,7 @@ function RandomTweet() {
   const handleSubmit = (twitterHandle) => {
     setShow(true);
     axios
-      .get("Random/api/tweets/random", {
+      .get("/Random/api/tweets/random", {
         params: {
           query: twitterHandle,
         },
@@ -79,7 +79,7 @@ function RandomTweet() {
       });
 
     axios
-      .get("Random/api/tweets/randomid", {
+      .get("/Random/api/tweets/randomid", {
         params: {
           query: twitterHandle,
         },

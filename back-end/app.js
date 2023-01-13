@@ -9,7 +9,7 @@ app.use("/Search", express.static("./front-end/build"));
 //try one remove the slash from random and then remove it from search 
 
 //  gets tweets with regular search
-app.get("Search/api/tweets", (req, res) => {
+app.get("/Search/api/tweets", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
@@ -47,7 +47,7 @@ app.get("Search/api/tweets", (req, res) => {
 });
 
 // gets random tweet from specified user
-app.get("Random/api/tweets/random", (req, res) => {
+app.get("/Random/api/tweets/random", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
@@ -69,7 +69,7 @@ app.get("Random/api/tweets/random", (req, res) => {
 });
 
 // gets tweets based on the id of the user
-app.get("Search/api/tweets/idtweet", (req, res) => {
+app.get("/Search/api/tweets/idtweet", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
@@ -107,7 +107,7 @@ app.get("Search/api/tweets/idtweet", (req, res) => {
 });
 
 // user name with random id
-app.get("Random/api/tweets/randomid", (req, res) => {
+app.get("/Random/api/tweets/randomid", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
@@ -129,7 +129,7 @@ app.get("Random/api/tweets/randomid", (req, res) => {
 });
 
 // get user to get the user id
-app.get("Search/api/tweets/userid", (req, res) => {
+app.get("/Search/api/tweets/userid", (req, res) => {
   const user = req.query.query;
   const options = {
     method: "GET",
