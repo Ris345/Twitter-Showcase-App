@@ -60,7 +60,7 @@ function RandomTweet() {
   const handleSubmit = (twitterHandle) => {
     setShow(true);
     axios
-      .get("https://twitterapp-nfle.onrender.com/api/tweets/random", {
+      .get("Random/api/tweets/random", {
         params: {
           query: twitterHandle,
         },
@@ -79,7 +79,7 @@ function RandomTweet() {
       });
 
     axios
-      .get("api/tweets/randomid", {
+      .get("Random/api/tweets/randomid", {
         params: {
           query: twitterHandle,
         },

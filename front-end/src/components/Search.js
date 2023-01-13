@@ -22,7 +22,7 @@ function SearchPage() {
   };
 
   const userTweets = async () => {
-    const response = await axios.get("https://twitterapp-nfle.onrender.com/api/tweets/userid", {
+    const response = await axios.get("Search/api/tweets/userid", {
       params: {
         query: userInput.slice(1),
       },
@@ -34,7 +34,7 @@ function SearchPage() {
       setuserName(response.data.data.username);
     }
     const userId = response.data.data.id;
-    const responses = await axios.get("https://twitterapp-nfle.onrender.com/api/tweets/idtweet", {
+    const responses = await axios.get("Search/api/tweets/idtweet", {
       params: {
         query: userId,
       },
