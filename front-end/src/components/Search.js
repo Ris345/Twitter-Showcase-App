@@ -99,6 +99,7 @@ function SearchPage() {
 
   console.log(tweets);
 
+  // display for '@' tweets 
   const showuserTweets = Object.values(text).map((tweet, index) => {
     return (
       <div key={index}>
@@ -119,7 +120,7 @@ function SearchPage() {
     );
   });
 
-  // display for search keywords
+  // display for regular tweets
   const showTweets = Object.values(tweetsContent).map((tweet, index) => {
     return (
       <div key={index}>

@@ -36,7 +36,6 @@ function RandomTweet() {
     if (hasMediaKeys) {
       // store the first media key in a variable
       const mediaKey = [tweets[results].attachments.media_keys[0]];
-      //const imageKey = tweetImages.media_key;
       const matchingImage = tweetImages.filter(({ media_key }) =>
         mediaKey.includes(media_key)
       );
