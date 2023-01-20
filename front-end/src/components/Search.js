@@ -97,7 +97,7 @@ function SearchPage() {
     }
   };
 
-  console.log(tweets);
+  
 
   // display for '@' tweets 
   const showuserTweets = Object.values(text).map((tweet, index) => {

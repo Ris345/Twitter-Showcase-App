@@ -51,9 +51,7 @@ function RandomTweet() {
     }
   };
 
-  console.log(randomTweet)
-  console.log(incoming)
-  console.log(tweetData)
+  
 
 
   const handleSubmit = (twitterHandle) => {
