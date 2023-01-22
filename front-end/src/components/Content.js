@@ -14,10 +14,10 @@ function Content() {
       >
         <Card.Body className="intro-flybird">
           <Card.Text>
-            <h1>Hello! Welcome to the fly bird app!</h1>
-           You may be wondering what the heck is this box doing? Honestly I
-           wander as well...but I want to show you the bigger picture. Let me
-           ask you what is your screen time? probably a lot and so is mine.
+            <h1>Hello! Welcome to the flybird app!</h1>
+           You may be wondering what is this box doing here....? Honestly I
+           wonder as well...but I want to show you the bigger picture. Let me
+           ask you what is your screen time? Probably a lot and so is mine!
            This app is designed for folks like you who spend countless hours
            scrolling through mindless content, maybe you ask is there a way to
            just see what you want without having to see irrelevant posts from

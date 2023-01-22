@@ -52,8 +52,6 @@ function RandomTweet() {
   };
 
   
-
-
   const handleSubmit = (twitterHandle) => {
     setShow(true);
     axios
